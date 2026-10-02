@@ -96,7 +96,7 @@ trap the user).
 
 ## Work split
 
-### Claude Code (core) — in progress
+### Claude Code (core) — DONE (smoke-tested; see PR)
 - `scripts/goal.sh`, `scripts/lib.sh`
 - `hooks/stop-hook.sh`, `hooks/context-hook.sh`, `hooks/hooks.json`
 - `commands/goal.md`, `agents/goal-verifier.md`, plugin.json, marketplace entry
@@ -113,7 +113,7 @@ trap the user).
    (no `sed -i`, no `${var,,}`, no associative arrays, no GNU-only flags). Report or fix.
 3. **CI**: `.github/workflows/goal-plugin-tests.yml` running `run-tests.sh` + `shellcheck`
    on `plugins/goal/**` for PRs touching that path.
-4. **README.md** for the plugin once core lands (usage, examples, writing good criteria,
+4. **README.md**: a minimal one exists — expand it (examples, writing good criteria,
    comparison with ralph-wiggum).
 
 Branch: `claude/busy-mendel-ns2o90`. Pull before pushing; don't edit core files
