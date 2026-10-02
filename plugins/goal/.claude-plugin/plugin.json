@@ -1,0 +1,9 @@
+{
+  "name": "goal",
+  "version": "1.0.0",
+  "description": "Goal-driven autonomous work. /goal sets a persistent objective with verifiable success criteria; Claude keeps working (via a Stop hook) until every criterion is checked off and the verify command passes, with the goal re-injected each turn and after compaction so it never drifts.",
+  "author": {
+    "name": "Anthropic",
+    "email": "support@anthropic.com"
+  }
+}
