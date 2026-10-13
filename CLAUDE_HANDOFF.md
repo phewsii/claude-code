@@ -38,3 +38,16 @@ Analyzer unit checks passed. HTML filter logic passed DOM-mock checks, not visua
 REA (morluto/rea) was evaluated as software reverse-engineering tooling. Its evidence-first method informed the implementation; it was not installed as a social scraper.
 
 No paid provider, public deployment, complete TikTok collector, fresh 100-account list, or paid performance claim exists yet.
+
+## Claude cloud session update (2026-10-13)
+
+Done:
+- Product_Review.html rebuilt in an Apple-style light design. It has a list/detail layout, Save/Test/Pass/Review buttons, search and filters (date, platform, seller type, decision), previous/next, keyboard shortcuts, a mobile full-screen detail sheet and a plain-language "Why it's here" list. It also has comparable-video clusters, awareness/sophistication with hook, timestamp and evidence fields, and collapsed advanced edits. Decisions, edits and imports persist in localStorage. Exports: portable reviewed HTML snapshot, JSON and current-view CSV. Import accepts JSON or CSV.
+- Browser QA in headless Chromium at 1360px and 390px: 34 scripted checks passed. They covered filters, keyboard, persistence across reload, import merge, all three exports, the snapshot reopening in a fresh browser with decisions intact, no horizontal scroll on mobile, and no page errors. Test fixtures stayed in the session scratchpad and were not committed.
+- content_system.py: maps common TikTok/Instagram provider export fields (not tested on a real export), adds saves, derives profile links, clusters comparables by exact product name, and adds a `coverage` report (qualified accounts out of 100).
+- build_outputs.py (new): rebuilds the HTML evidence block and Product_Review.xlsx (Ideas/Evidence/Coverage sheets) from Evidence.json or an analysis.json. Native hyperlinks, dropdowns and cached images in images/.
+
+Not done (blocked):
+- 100-account collection. This cloud container cannot reach tiktok.com, instagram.com, graph.facebook.com or scraping providers. The proxy denies them and web fetch cannot resolve tiktok.com. No META_ACCESS_TOKEN or provider key is present. No rows were invented. Evidence.json is unchanged: 5 undated posts, 0 of 100 qualified accounts.
+- To proceed, run collection where network access and credentials exist (Codex or the user's Mac). Use collect_meta.py or a provider export (e.g. a TikTok scraper dataset with playCount/createTimeISO), then `content_system.py` and `build_outputs.py`, and commit.
+- Legacy sophistication labels "3 - Explain the mechanism" / "4 - Improve the mechanism" are normalized to the workbook's shorter wording.

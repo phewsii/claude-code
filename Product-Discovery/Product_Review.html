@@ -1,27 +1,656 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Product Review</title>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Product Review</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font:14px Arial,sans-serif;color:#22292b;background:#fff;letter-spacing:0}header{padding:20px 28px;border-bottom:1px solid #dce3df;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}h1{font-size:22px;margin:0}button,select,input,textarea{font:inherit;color:inherit}button{cursor:pointer;background:white;border:1px solid #bdc9c3;border-radius:4px;padding:9px 12px}button:hover,button[aria-pressed=true]{background:#e5f0e9}button:focus-visible,input:focus,select:focus,textarea:focus{outline:2px solid #16804c;outline-offset:2px}.primary{background:#176b45;color:#fff;border-color:#176b45}.primary:hover{background:#125837}nav{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:16px 28px;border-bottom:1px solid #dce3df}input,select,textarea{border:1px solid #bcc9c3;border-radius:4px;padding:9px;background:white;min-width:0}#search{width:260px;max-width:100%}.layout{display:grid;grid-template-columns:minmax(320px,1fr) minmax(330px,420px);min-height:70vh}main{padding:20px 28px;min-width:0}aside{padding:24px;border-left:1px solid #dce3df;background:#f6f8f7;min-width:0}.muted{color:#65716b;font-size:12px}.summary{display:flex;gap:24px;margin:0 0 20px;flex-wrap:wrap}.summary strong{font-size:20px;display:block;color:#176b45}.item{border-bottom:1px solid #e1e7e3;padding:14px 0;display:grid;grid-template-columns:72px 1fr auto;gap:14px;align-items:center}.item.selected{background:#eff6f1}.picture{width:72px;height:72px;object-fit:contain;background:#f0f3f1;border-radius:4px}.no-image{display:flex;align-items:center;justify-content:center;color:#78837d;font-size:11px;text-align:center;padding:8px}.item-title{border:0;padding:0;background:transparent;text-align:left;font-weight:bold;line-height:1.5;overflow-wrap:anywhere}.item p{margin:4px 0;line-height:1.5}.metrics{font-variant-numeric:tabular-nums;font-size:12px;text-align:right;line-height:1.8}.tag{color:#815a12;font-size:12px}.empty{padding:45px 0;max-width:470px;line-height:1.8}h2{font-size:18px;margin:0 0 14px;overflow-wrap:anywhere}h3{font-size:14px;margin:22px 0 12px}a{color:#176b45}.actions{display:flex;gap:8px;flex-wrap:wrap}.detail-image{width:100%;height:200px;object-fit:contain;background:white;margin:14px 0}dl{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:18px 0}dt{color:#65716b}dd{margin:0;text-align:right}label{display:block;font-size:12px;color:#4a5950;margin:12px 0 5px}aside input,aside select,aside textarea{width:100%}textarea{min-height:75px;resize:vertical}.caption{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.6}.notice{padding:10px 28px;color:#725314;background:#fff7e6;font-size:12px}#message{padding:0 28px;color:#9e352d}details{margin:12px 0}summary{cursor:pointer}footer{padding:16px 28px;color:#65716b;border-top:1px solid #dce3df;font-size:12px}.account{padding:18px 0;border-bottom:1px solid #dce3df}.account p{line-height:1.7}@media(max-width:800px){.layout{grid-template-columns:1fr}aside{border-left:0;border-top:1px solid #dce3df}header,nav,main,aside{padding:16px}.item{grid-template-columns:60px 1fr}.picture{width:60px;height:60px}.metrics{grid-column:2;text-align:left}#search{width:100%}}
-</style></head><body>
-<header><h1>Product Review</h1><div class="actions"><button id="import">Import evidence</button><button id="csv">Export sheet</button><button class="primary" id="share">Export review</button><input id="file" type="file" accept=".json" hidden></div></header>
-<nav><button id="ideas" aria-pressed="true">Ideas</button><button id="accounts" aria-pressed="false">Account systems</button><input id="search" type="search" placeholder="Search product or account" aria-label="Search product or account"><select id="platform" aria-label="Platform"><option>All platforms</option><option>Instagram</option><option>TikTok</option></select><select id="window" aria-label="Post age"><option value="24">Last 24 hours</option><option value="72">Last 3 days</option><option value="168">Last 7 days</option><option value="all">All evidence</option></select><select id="decision" aria-label="Decision"><option>All decisions</option><option>Review</option><option>Save</option><option>Test</option><option>Pass</option></select><label style="margin:0"><input id="seller" type="checkbox"> Product sellers only</label></nav>
-<div class="notice" id="notice">No same-day winners verified yet. Imported evidence is a snapshot; missing dates stay out of the recent view.</div><p id="message" role="status"></p>
-<div class="layout"><main><div class="summary" id="counts"></div><div id="list"></div></main><aside id="detail"></aside></div>
-<footer id="freshness"></footer>
-<script id="evidence" type="application/json">{"posts":[{"views":null,"likes":883,"comments":4,"shares":null,"url":"https://www.instagram.com/p/DeUCR_bDcNO/","posted_at":null,"platform":"Instagram","account":"Unverified","account_type":"Unverified","product":"Loungefly stained-glass ear headbands","caption":"Amazon Exclusive Stained Glass Ear Headbands by Loungefly. At just $29 each. Cinderella or Rapunzel?","transcript":"","format":"Not reviewed","hook":"Not reviewed","offer":"","image_url":"https://i0.wp.com/chipandco.com/wp-content/uploads/2026/10/IMG_9001.jpeg?quality=65&resize=696%2C572&ssl=1","captured_at":"","decision":"Review","notes":"Product photo matched to named headbands. Branded reference only; seller, post date and paid potential are unverified.","sampling":"hashtag_top","audience":"","seller_url":"","buyer_questions":"","awareness":"Unreviewed","sophistication":"Unreviewed","strategy_evidence":"","giveaway":false,"keyword_cta":false,"offer_signal":true,"funnel":"Purchase-focused caption (inferred)","published_time_verified":false,"image_source":"https://chipandco.com/amazon-exclusive-disney-princess-ear-headbands-655278/"},{"views":null,"likes":437,"comments":968,"shares":null,"url":"https://www.instagram.com/p/DeX7r9HFThZ/","posted_at":null,"platform":"Instagram","account":"Unverified","account_type":"Unverified","product":"Fall fashion roundup","caption":"Comment CHAT and I will send you links to everything! Amazon fall fashion finds: watches, shoes, pants, jackets.","transcript":"","format":"Not reviewed","hook":"Not reviewed","offer":"","image_url":"","captured_at":"","decision":"Review","notes":"Multiple products. Link-request CTA can inflate comments. Not a verified product seller.","sampling":"hashtag_top","audience":"","seller_url":"","buyer_questions":"","awareness":"Unreviewed","sophistication":"Unreviewed","strategy_evidence":"","giveaway":false,"keyword_cta":true,"offer_signal":false,"funnel":"Purchase-focused caption (inferred)","published_time_verified":false},{"views":null,"likes":587,"comments":1015,"shares":null,"url":"https://www.instagram.com/p/Dd8-RScFh4g/","posted_at":null,"platform":"Instagram","account":"Unverified","account_type":"Unverified","product":"Home deals roundup","caption":"Do not wait for Prime Day. My home deals have started. Type SHOP PLEASE and I will send all details. Home items marked down.","transcript":"","format":"Not reviewed","hook":"Not reviewed","offer":"","image_url":"","captured_at":"","decision":"Review","notes":"Offer-based caption; individual product, account and post age unverified.","sampling":"hashtag_top","audience":"","seller_url":"","buyer_questions":"","awareness":"Unreviewed","sophistication":"Unreviewed","strategy_evidence":"","giveaway":false,"keyword_cta":true,"offer_signal":true,"funnel":"Purchase-focused caption (inferred)","published_time_verified":false},{"views":null,"likes":554,"comments":2044,"shares":null,"url":"https://www.instagram.com/p/DeM4Qowmoj1/","posted_at":null,"platform":"Instagram","account":"Unverified","account_type":"Unverified","product":"Prime Day fashion roundup","caption":"Prime Day deals I already own, wear or use. LIKE and COMMENT PRIME and I will send to you. Jeans, pants, sneakers, cardigan, matching set.","transcript":"","format":"Not reviewed","hook":"Not reviewed","offer":"","image_url":"","captured_at":"","decision":"Review","notes":"Caption matches an indexed Julie Franks post; ownership still requires direct verification. Multiple products, not qualified.","sampling":"hashtag_top","audience":"","seller_url":"","buyer_questions":"","awareness":"Unreviewed","sophistication":"Unreviewed","strategy_evidence":"","giveaway":false,"keyword_cta":true,"offer_signal":true,"funnel":"Purchase-focused caption (inferred)","published_time_verified":false},{"views":null,"likes":1005,"comments":5189,"shares":null,"url":"https://www.instagram.com/p/DeK2CZyAdKy/","posted_at":null,"platform":"Instagram","account":"Unverified","account_type":"Unverified","product":"Amazon gift-card giveaway","caption":"Giveaway closed. $500 Amazon gift card giveaway. Comment PRIME. To enter: like, comment, share. One winner.","transcript":"","format":"Not reviewed","hook":"Not reviewed","offer":"","image_url":"","captured_at":"","decision":"Review","notes":"Giveaway engagement. Exclude from product-demand comparison.","sampling":"hashtag_top","audience":"","seller_url":"","buyer_questions":"","awareness":"Unreviewed","sophistication":"Unreviewed","strategy_evidence":"","giveaway":true,"keyword_cta":true,"offer_signal":true,"funnel":"Purchase-focused caption (inferred)","published_time_verified":false}],"systems":[],"limitations":"Caption rules are tentative tags, not video analysis. Unknown metrics remain blank. Hashtag top posts are a selected sample, not a representative account history."}</script>
+:root{
+  --bg:#f5f5f7;--surface:#fff;--surface-2:#fbfbfd;--line:#e5e5ea;--line-strong:#d2d2d7;
+  --text:#1d1d1f;--text-2:#6e6e73;--text-3:#86868b;
+  --accent:#0071e3;--accent-hover:#0077ed;--accent-soft:#e8f2fd;
+  --save:#248a3d;--save-soft:#e9f6ec;--test:#b25000;--test-soft:#fff3e6;--pass:#8e8e93;--pass-soft:#f2f2f7;--warn:#a05a00;--warn-soft:#fff8eb;--bad:#c9302c;
+  --radius:14px;--radius-sm:10px;--shadow:0 1px 2px rgba(0,0,0,.04),0 4px 16px rgba(0,0,0,.04);
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font:15px/1.47 var(--font);-webkit-font-smoothing:antialiased;letter-spacing:-.01em}
+button,input,select,textarea{font:inherit;color:inherit;letter-spacing:inherit}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+:focus-visible{outline:3px solid rgba(0,113,227,.45);outline-offset:2px;border-radius:8px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Top bar */
+.top{position:sticky;top:0;z-index:20;background:rgba(251,251,253,.82);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--line)}
+.top-inner{max-width:1440px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:16px}
+.brand{font-size:19px;font-weight:600;letter-spacing:-.02em;margin:0;white-space:nowrap}
+.seg{display:inline-flex;background:#e8e8ed;border-radius:9px;padding:2px}
+.seg button{border:0;background:transparent;padding:5px 14px;border-radius:7px;font-size:13px;font-weight:500;color:var(--text);cursor:pointer;white-space:nowrap}
+.seg button[aria-pressed=true]{background:var(--surface);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.spacer{flex:1}
+.btn{border:0;border-radius:980px;padding:7px 16px;font-size:13px;font-weight:500;cursor:pointer;background:#e8e8ed;color:var(--text);white-space:nowrap}
+.btn:hover{background:#dcdce1}.btn:disabled{opacity:.4;cursor:default}
+.btn.primary{background:var(--accent);color:#fff}.btn.primary:hover{background:var(--accent-hover)}
+.btn.ghost{background:transparent;color:var(--accent);padding:7px 10px}.btn.ghost:hover{background:var(--accent-soft)}
+.menu{position:relative}
+.menu-list{position:absolute;right:0;top:calc(100% + 6px);min-width:250px;background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,.14);padding:6px;display:none;z-index:30}
+.menu-list.open{display:block}
+.menu-list button{display:block;width:100%;text-align:left;border:0;background:transparent;padding:9px 12px;border-radius:8px;font-size:14px;cursor:pointer}
+.menu-list button:hover,.menu-list button:focus-visible{background:var(--accent-soft)}
+.menu-list small{display:block;color:var(--text-2);font-size:12px}
+.menu-list hr{border:0;border-top:1px solid var(--line);margin:6px 4px}
+
+/* Toolbar */
+.toolbar{max-width:1440px;margin:0 auto;padding:16px 24px 8px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.search{position:relative;flex:1 1 260px;max-width:420px}
+.search input{width:100%;border:0;background:#e8e8ed;border-radius:10px;padding:8px 12px 8px 34px;font-size:14px}
+.search input:focus{background:var(--surface);box-shadow:0 0 0 3px rgba(0,113,227,.3);outline:0}
+.search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--text-3)}
+.search kbd{position:absolute;right:9px;top:50%;transform:translateY(-50%)}
+kbd{font:11px var(--font);color:var(--text-2);border:1px solid var(--line-strong);border-bottom-width:2px;border-radius:5px;padding:0 5px;background:var(--surface)}
+.pick{appearance:none;-webkit-appearance:none;border:1px solid var(--line-strong);background:var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%2386868b' fill='none' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 11px center;border-radius:980px;padding:6px 30px 6px 14px;font-size:13px;cursor:pointer}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--line-strong);background:var(--surface);border-radius:980px;padding:5px 12px;font-size:13px;cursor:pointer;display:inline-flex;gap:6px;align-items:center}
+.chip[aria-pressed=true]{background:var(--text);border-color:var(--text);color:#fff}
+.chip .n{color:var(--text-3);font-variant-numeric:tabular-nums}.chip[aria-pressed=true] .n{color:#c7c7cc}
+
+/* Progress strip */
+.progress{max-width:1440px;margin:0 auto;padding:4px 24px 14px;display:flex;gap:22px;flex-wrap:wrap;font-size:13px;color:var(--text-2)}
+.progress b{color:var(--text);font-weight:600;font-variant-numeric:tabular-nums}
+.meter{display:inline-block;width:80px;height:6px;border-radius:3px;background:#e8e8ed;vertical-align:middle;margin-left:6px;overflow:hidden}
+.meter i{display:block;height:100%;background:var(--accent);border-radius:3px}
+.status{max-width:1440px;margin:0 auto;padding:0 24px}
+.status:empty{display:none}
+.status div{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:12px;font-size:13px}
+.status .err{border-color:#f3c2c0;background:#fff5f5;color:var(--bad)}
+
+/* Layout */
+.layout{max-width:1440px;margin:0 auto;padding:0 24px 40px;display:grid;grid-template-columns:minmax(340px,440px) minmax(0,1fr);gap:20px;align-items:start}
+.list-pane{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.list-head{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line);font-size:13px;color:var(--text-2)}
+.list{list-style:none;margin:0;padding:6px;max-height:calc(100vh - 230px);overflow:auto}
+.group-label{font-size:12px;font-weight:600;color:var(--text-2);text-transform:uppercase;letter-spacing:.04em;padding:12px 10px 6px}
+.row{display:grid;grid-template-columns:56px 1fr auto;gap:12px;align-items:center;width:100%;text-align:left;border:0;background:transparent;padding:10px;border-radius:12px;cursor:pointer}
+.row:hover{background:var(--surface-2)}
+.row[aria-selected=true]{background:var(--accent-soft)}
+.thumb{width:56px;height:56px;border-radius:10px;object-fit:cover;background:#f2f2f7;display:flex;align-items:center;justify-content:center;color:var(--text-3);font-size:10px;text-align:center;line-height:1.2;overflow:hidden}
+.row-title{font-weight:600;font-size:14px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.row-sub{font-size:12px;color:var(--text-2);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row-kpi{text-align:right;font-size:12px;color:var(--text-2);font-variant-numeric:tabular-nums;line-height:1.35}
+.row-kpi b{display:block;color:var(--text);font-size:14px;font-weight:600}
+.pill{display:inline-block;font-size:11px;font-weight:600;border-radius:980px;padding:1px 8px;margin-top:4px;white-space:nowrap}
+.pill.Review{background:#f2f2f7;color:var(--text-2)}.pill.Save{background:var(--save-soft);color:var(--save)}.pill.Test{background:var(--test-soft);color:var(--test)}.pill.Pass{background:var(--pass-soft);color:var(--pass)}
+.pill.flag{background:var(--warn-soft);color:var(--warn)}
+.empty{padding:40px 24px;text-align:center;color:var(--text-2)}
+.empty h2{font-size:17px;color:var(--text);margin:0 0 6px}
+.empty p{margin:0 0 16px;font-size:14px}
+
+/* Detail */
+.detail{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);min-height:420px;position:sticky;top:76px;max-height:calc(100vh - 96px);overflow:auto}
+.detail-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);z-index:2}
+.detail-bar .pos{font-size:13px;color:var(--text-2);font-variant-numeric:tabular-nums}
+.icon-btn{border:0;background:#f2f2f7;width:30px;height:30px;border-radius:50%;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:15px}
+.icon-btn:hover{background:#e8e8ed}.icon-btn:disabled{opacity:.35;cursor:default}
+.back{display:none}
+.detail-body{padding:24px 28px 32px}
+.hero{display:grid;grid-template-columns:200px 1fr;gap:24px;align-items:start}
+.hero-img{width:200px;height:200px;border-radius:16px;object-fit:contain;background:#f5f5f7;display:flex;align-items:center;justify-content:center;color:var(--text-3);font-size:13px;text-align:center;padding:12px}
+.eyebrow{font-size:12px;font-weight:600;color:var(--text-2);text-transform:uppercase;letter-spacing:.05em}
+.hero h2{font-size:26px;line-height:1.15;letter-spacing:-.02em;margin:4px 0 8px;overflow-wrap:anywhere}
+.links{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.link-btn{display:inline-flex;align-items:center;gap:5px;border-radius:980px;padding:6px 14px;font-size:13px;font-weight:500;background:var(--accent);color:#fff}
+.link-btn:hover{background:var(--accent-hover);text-decoration:none}
+.link-btn.secondary{background:var(--accent-soft);color:var(--accent)}
+.link-btn.off{background:#f2f2f7;color:var(--text-3);pointer-events:none}
+.decide{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:24px 0 8px}
+.decide button{border:1.5px solid var(--line-strong);background:var(--surface);border-radius:12px;padding:10px 6px;font-weight:600;font-size:14px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px}
+.decide button small{font-weight:400;font-size:11px;color:var(--text-3)}
+.decide button:hover{border-color:var(--text-3)}
+.decide button[aria-pressed=true][data-d=Save]{border-color:var(--save);background:var(--save-soft);color:var(--save)}
+.decide button[aria-pressed=true][data-d=Test]{border-color:var(--test);background:var(--test-soft);color:var(--test)}
+.decide button[aria-pressed=true][data-d=Pass]{border-color:var(--pass);background:var(--pass-soft);color:#3a3a3c}
+.decide button[aria-pressed=true][data-d=Review]{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.reviewed-at{font-size:12px;color:var(--text-3);margin:0 0 4px}
+h3{font-size:17px;letter-spacing:-.01em;margin:28px 0 12px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px}
+.kpi{background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.kpi span{font-size:12px;color:var(--text-2)}
+.kpi b{display:block;font-size:22px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin-top:2px}
+.kpi.na b{font-size:14px;font-weight:500;color:var(--text-3);padding:5px 0 3px}
+.kpi em{display:block;font-style:normal;font-size:11px;color:var(--text-3)}
+.facts{font-size:13px;color:var(--text-2);margin-top:10px}
+.signals{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.signals li{display:grid;grid-template-columns:22px 1fr;gap:8px;font-size:14px;line-height:1.45}
+.signals .ic{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;margin-top:1px}
+.ic.good{background:var(--save-soft);color:var(--save)}.ic.warn{background:var(--warn-soft);color:var(--warn)}.ic.bad{background:#fdecec;color:var(--bad)}.ic.info{background:#f2f2f7;color:var(--text-2)}
+.card{background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+label.f{display:block;font-size:12px;font-weight:500;color:var(--text-2);margin:12px 0 5px}
+.in{width:100%;border:1px solid var(--line-strong);border-radius:10px;padding:8px 11px;background:var(--surface);font-size:14px}
+.in:focus{outline:0;border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,227,.2)}
+textarea.in{min-height:76px;resize:vertical;line-height:1.45}
+select.in{appearance:none;-webkit-appearance:none;background:var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%2386868b' fill='none' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 12px center;padding-right:30px}
+.hint{font-size:12px;color:var(--text-3);margin-top:4px}
+details.adv{border-top:1px solid var(--line);margin-top:24px}
+details.adv summary{cursor:pointer;list-style:none;padding:14px 0;font-weight:600;font-size:15px;display:flex;justify-content:space-between}
+details.adv summary::-webkit-details-marker{display:none}
+details.adv summary::after{content:"+";color:var(--text-3);font-weight:400;font-size:20px;line-height:1}
+details.adv[open] summary::after{content:"\2212"}
+.quote{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px;line-height:1.55;color:var(--text)}
+.cluster{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.cluster li{display:flex;justify-content:space-between;gap:12px;font-size:13px;padding:8px 12px;background:var(--surface-2);border:1px solid var(--line);border-radius:10px}
+.cluster li span{color:var(--text-2);font-variant-numeric:tabular-nums;white-space:nowrap}
+.shortcuts{font-size:12px;color:var(--text-3);margin-top:28px;line-height:2}
+
+/* Accounts */
+.acct-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;max-width:1440px;margin:0 auto;padding:0 24px 40px}
+.acct{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px}
+.acct h2{font-size:17px;margin:0 0 2px;overflow-wrap:anywhere}
+.acct p{font-size:13px;color:var(--text-2);margin:6px 0}
+.acct .links{margin-top:10px}
+
+footer{max-width:1440px;margin:0 auto;padding:0 24px 32px;font-size:12px;color:var(--text-3);line-height:1.6}
+
+@media (max-width:900px){
+  .top-inner{padding:10px 16px;flex-wrap:wrap;gap:10px}
+  .toolbar,.progress,.status,footer{padding-left:16px;padding-right:16px}
+  .search{max-width:none;flex-basis:100%}
+  .layout{grid-template-columns:1fr;padding:0 16px 32px}
+  .acct-grid{padding:0 16px 32px}
+  .list{max-height:none}
+  .detail{display:none;position:fixed;inset:0;top:0;max-height:none;border-radius:0;z-index:40}
+  .detail.open{display:block}
+  .back{display:inline-flex}
+  .detail-body{padding:20px 16px 40px}
+  .hero{grid-template-columns:1fr}
+  .hero-img{width:100%;height:220px}
+  div.hero-img{height:72px}
+  .grid2{grid-template-columns:1fr}
+  .hide-sm{display:none}
+}
+@media (prefers-reduced-motion:no-preference){.row,.btn,.chip,.decide button{transition:background .15s,border-color .15s,color .15s}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <h1 class="brand">Product Review</h1>
+    <div class="seg" role="group" aria-label="View">
+      <button id="view-products" aria-pressed="true">Products</button>
+      <button id="view-accounts" aria-pressed="false">Accounts</button>
+    </div>
+    <div class="spacer"></div>
+    <button class="btn" id="import-btn">Import</button>
+    <div class="menu">
+      <button class="btn primary" id="export-btn" aria-haspopup="true" aria-expanded="false" aria-controls="export-menu">Export</button>
+      <div class="menu-list" id="export-menu" role="menu">
+        <button role="menuitem" data-export="html">Reviewed snapshot (.html)<small>Standalone page with your decisions built in</small></button>
+        <button role="menuitem" data-export="json">Reviewed data (.json)<small>Re-import here or hand to Codex</small></button>
+        <button role="menuitem" data-export="csv">Current view (.csv)<small>Opens in Excel or Numbers</small></button>
+        <hr>
+        <button role="menuitem" data-export="reset">Clear local edits<small>Revert to the evidence in this file</small></button>
+      </div>
+    </div>
+    <input id="file" type="file" accept=".json,.csv,application/json,text/csv" hidden>
+  </div>
+</header>
+
+<div class="toolbar" id="toolbar">
+  <div class="search">
+    <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M11 11l3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <label class="sr" for="q">Search products, accounts or captions</label>
+    <input id="q" type="search" placeholder="Search products, accounts, captions" autocomplete="off">
+    <kbd class="hide-sm" aria-hidden="true">/</kbd>
+  </div>
+  <label class="sr" for="f-age">Published</label>
+  <select class="pick" id="f-age">
+    <option value="24">Published in last 24 hours</option>
+    <option value="72">Last 3 days</option>
+    <option value="168">Last 7 days</option>
+    <option value="all">All evidence, including undated</option>
+  </select>
+  <label class="sr" for="f-platform">Platform</label>
+  <select class="pick" id="f-platform"><option value="">All platforms</option></select>
+  <label class="sr" for="f-seller">Seller type</label>
+  <select class="pick" id="f-seller"><option value="">All seller types</option></select>
+  <div class="chips" role="group" aria-label="Decision" id="f-status"></div>
+</div>
+
+<div class="progress" id="progress" aria-live="polite"></div>
+<div class="status" id="status" role="status" aria-live="polite"></div>
+
+<main id="products-view" class="layout">
+  <section class="list-pane" aria-label="Products">
+    <div class="list-head"><span id="list-count"></span><span class="hide-sm"><kbd>↑</kbd> <kbd>↓</kbd> to move</span></div>
+    <ul class="list" id="list" role="listbox" aria-label="Products in view" tabindex="0"></ul>
+  </section>
+  <section class="detail" id="detail" aria-label="Selected product" tabindex="-1"></section>
+</main>
+<main id="accounts-view" hidden><div class="acct-grid" id="accounts"></div></main>
+
+<footer id="foot"></footer>
+
+<script id="evidence" type="application/json">{"posts":[{"views":null,"likes":883,"comments":4,"shares":null,"url":"https://www.instagram.com/p/DeUCR_bDcNO/","posted_at":null,"platform":"Instagram","account":"Unverified","account_type":"Unverified","product":"Loungefly stained-glass ear headbands","caption":"Amazon Exclusive Stained Glass Ear Headbands by Loungefly. At just $29 each. Cinderella or Rapunzel?","transcript":"","format":"","hook":"","hook_timestamp":"","offer":"","image_url":"https://i0.wp.com/chipandco.com/wp-content/uploads/2026/10/IMG_9001.jpeg?quality=65&resize=696%2C572&ssl=1","captured_at":"","decision":"Review","notes":"Product photo matched to named headbands. Branded reference only; seller, post date and paid potential are unverified.","sampling":"hashtag_top","audience":"","profile_url":"","seller_url":"","buyer_questions":"","awareness":"Unreviewed","sophistication":"Unreviewed","strategy_evidence":"","image_source":"https://chipandco.com/amazon-exclusive-disney-princess-ear-headbands-655278/","saves":null,"giveaway":false,"keyword_cta":false,"offer_signal":true,"funnel":"Purchase-focused caption (inferred)","comparables":[],"published_time_verified":false},{"views":null,"likes":437,"comments":968,"shares":null,"url":"https://www.instagram.com/p/DeX7r9HFThZ/","posted_at":null,"platform":"Instagram","account":"Unverified","account_type":"Unverified","product":"Fall fashion roundup","caption":"Comment CHAT and I will send you links to everything! Amazon fall fashion finds: watches, shoes, pants, jackets.","transcript":"","format":"","hook":"","hook_timestamp":"","offer":"","image_url":"","captured_at":"","decision":"Review","notes":"Multiple products. Link-request CTA can inflate comments. Not a verified product seller.","sampling":"hashtag_top","audience":"","profile_url":"","seller_url":"","buyer_questions":"","awareness":"Unreviewed","sophistication":"Unreviewed","strategy_evidence":"","image_source":"","saves":null,"giveaway":false,"keyword_cta":true,"offer_signal":false,"funnel":"Purchase-focused caption (inferred)","comparables":[],"published_time_verified":false},{"views":null,"likes":587,"comments":1015,"shares":null,"url":"https://www.instagram.com/p/Dd8-RScFh4g/","posted_at":null,"platform":"Instagram","account":"Unverified","account_type":"Unverified","product":"Home deals roundup","caption":"Do not wait for Prime Day. My home deals have started. Type SHOP PLEASE and I will send all details. Home items marked down.","transcript":"","format":"","hook":"","hook_timestamp":"","offer":"","image_url":"","captured_at":"","decision":"Review","notes":"Offer-based caption; individual product, account and post age unverified.","sampling":"hashtag_top","audience":"","profile_url":"","seller_url":"","buyer_questions":"","awareness":"Unreviewed","sophistication":"Unreviewed","strategy_evidence":"","image_source":"","saves":null,"giveaway":false,"keyword_cta":true,"offer_signal":true,"funnel":"Purchase-focused caption (inferred)","comparables":[],"published_time_verified":false},{"views":null,"likes":554,"comments":2044,"shares":null,"url":"https://www.instagram.com/p/DeM4Qowmoj1/","posted_at":null,"platform":"Instagram","account":"Unverified","account_type":"Unverified","product":"Prime Day fashion roundup","caption":"Prime Day deals I already own, wear or use. LIKE and COMMENT PRIME and I will send to you. Jeans, pants, sneakers, cardigan, matching set.","transcript":"","format":"","hook":"","hook_timestamp":"","offer":"","image_url":"","captured_at":"","decision":"Review","notes":"Caption matches an indexed Julie Franks post; ownership still requires direct verification. Multiple products, not qualified.","sampling":"hashtag_top","audience":"","profile_url":"","seller_url":"","buyer_questions":"","awareness":"Unreviewed","sophistication":"Unreviewed","strategy_evidence":"","image_source":"","saves":null,"giveaway":false,"keyword_cta":true,"offer_signal":true,"funnel":"Purchase-focused caption (inferred)","comparables":[],"published_time_verified":false},{"views":null,"likes":1005,"comments":5189,"shares":null,"url":"https://www.instagram.com/p/DeK2CZyAdKy/","posted_at":null,"platform":"Instagram","account":"Unverified","account_type":"Unverified","product":"Amazon gift-card giveaway","caption":"Giveaway closed. $500 Amazon gift card giveaway. Comment PRIME. To enter: like, comment, share. One winner.","transcript":"","format":"","hook":"","hook_timestamp":"","offer":"","image_url":"","captured_at":"","decision":"Review","notes":"Giveaway engagement. Exclude from product-demand comparison.","sampling":"hashtag_top","audience":"","profile_url":"","seller_url":"","buyer_questions":"","awareness":"Unreviewed","sophistication":"Unreviewed","strategy_evidence":"","image_source":"","saves":null,"giveaway":true,"keyword_cta":true,"offer_signal":true,"funnel":"Purchase-focused caption (inferred)","comparables":[],"published_time_verified":false}],"systems":[],"coverage":{"checked_at":"2026-10-13T01:31:44.625491+00:00","window_hours":24,"posts":5,"named_accounts":0,"qualified_accounts":0,"target_accounts":100,"older_or_incomplete_accounts":0,"metric_coverage":{"views":0.0,"likes":1.0,"comments":1.0,"shares":0.0,"saves":0.0},"dated_posts":0,"with_image":1,"with_profile_link":0,"with_store_link":0,"with_3plus_comparables":0,"giveaways_excluded":1},"limitations":"Caption rules are tentative tags, not video analysis. Unknown metrics remain blank. Hashtag top posts are a selected sample, not a representative account history."}</script>
 <script>
-let data=JSON.parse(document.getElementById('evidence').textContent),posts=data.posts,mode='ideas',selected=null;const $=id=>document.getElementById(id),esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])),num=v=>v==null||v===''?'Unavailable':Number(v).toLocaleString();
-function safeUrl(v){try{const u=new URL(v);return u.protocol==='https:'?u.href:''}catch{return ''}}
-function visible(){const hours=$('window').value,now=Date.now();return posts.filter(p=>{const age=now-Date.parse(p.posted_at),dateVerified=typeof p.posted_at==='string'&&/(Z|[+-]\d\d:?\d\d)$/.test(p.posted_at);return ($('platform').value==='All platforms'||p.platform===$('platform').value)&&($('decision').value==='All decisions'||p.decision===$('decision').value)&&(!$('seller').checked||p.account_type==='Product seller')&&(hours==='all'||dateVerified&&age>=0&&age<=Number(hours)*3600000)&&(p.product+' '+p.account+' '+p.caption).toLowerCase().includes($('search').value.toLowerCase())})}
-function picture(p,large=false){const src=safeUrl(p.image_url);return src?`<img class="${large?'detail-image':'picture'}" src="${esc(src)}" alt="${esc(p.product||'Source product')}" loading="lazy" referrerpolicy="no-referrer">`:`<div class="${large?'detail-image':'picture'} no-image">Image unverified</div>`}
-function render(){const rows=visible();$('ideas').setAttribute('aria-pressed',mode==='ideas');$('accounts').setAttribute('aria-pressed',mode==='accounts');$('counts').innerHTML=`<div><strong>${rows.length}</strong>Posts in view</div><div><strong>${rows.filter(p=>['Save','Test'].includes(p.decision)).length}</strong>Saved or testing</div><div><strong>${new Set(rows.filter(p=>p.account!=='Unverified').map(p=>p.platform+':'+p.account)).size}</strong>Verified account names</div>`;if(mode==='accounts'){renderAccounts(rows);return}if(!rows.some(p=>p.url===selected))selected=rows[0]?.url||null;$('list').innerHTML=rows.length?rows.map(p=>`<article class="item ${p.url===selected?'selected':''}">${picture(p)}<div><button class="item-title" data-select="${esc(p.url)}">${esc(p.product||'Product not reviewed')}</button><p class="muted">${esc(p.platform)} / ${esc(p.account)} / ${esc(p.decision||'Review')}</p><p class="tag">${p.giveaway?'Giveaway':p.keyword_cta?'Link-request comments':esc(p.account_type||'Seller unverified')}</p></div><div class="metrics">Views ${num(p.views)}<br>Likes ${num(p.likes)} / Comments ${num(p.comments)}</div></article>`).join(''):'<div class="empty"><h2>No posts meet this view</h2>Publication times and fresh performance evidence are still needed. Older research remains under <button id="all">All evidence</button>.</div>';$('list').querySelectorAll('[data-select]').forEach(b=>b.onclick=()=>{selected=b.dataset.select;render()});if($('all'))$('all').onclick=()=>{$('window').value='all';render()};renderDetail();$('freshness').textContent='Published dates define freshness. Collection date: '+(data.captured_at||'Not recorded')+'. Public metrics do not establish sales or paid-ad returns.';document.querySelectorAll('img').forEach(im=>im.onerror=()=>im.replaceWith(Object.assign(document.createElement('span'),{textContent:'Image unavailable',className:'picture no-image'})))}
-function renderAccounts(rows){const groups=new Map();rows.filter(p=>p.account&&p.account!=='Unverified').forEach(p=>{const key=p.platform+':'+p.account;if(!groups.has(key))groups.set(key,[]);groups.get(key).push(p)});$('list').innerHTML=groups.size?[...groups].map(([name,g])=>{const products=new Map();g.forEach(p=>{if(p.product)products.set(p.product,(products.get(p.product)||0)+1)});return `<section class="account"><h2>${esc(name)}</h2><p>${g.length} sampled posts. ${g.filter(p=>p.keyword_cta).length} link-request CTAs. ${g.filter(p=>p.giveaway).length} giveaways.</p><p>Repeated products: ${esc([...products].filter(([n,c])=>c>1).map(([n,c])=>n+' ('+c+' posts)').join(', ')||'Not established')}</p><p class="muted">Posting rate needs a complete dated window. Similarity, audience and sales remain unverified unless reviewed.</p></section>`}).join(''):'<div class="empty"><h2>Account systems need verified identities</h2>The hashtag sample has not yet been traced to account histories.</div>';$('detail').innerHTML='<h2>System breakdown</h2><p class="caption">Review repeated products, creative formats, hooks, offers and awareness stages across each account. A selected hashtag sample cannot establish an account\'s usual performance.</p>'}
-function field(label,key,options){const p=posts.find(p=>p.url===selected);return `<label for="edit-${key}">${label}</label>`+(options?`<select data-key="${key}" id="edit-${key}">${options.map(o=>`<option ${p[key]===o?'selected':''}>${esc(o)}</option>`).join('')}</select>`:`<input data-key="${key}" id="edit-${key}" value="${esc(p[key])}">`)}
-function renderDetail(){const p=posts.find(p=>p.url===selected);if(!p){$('detail').innerHTML='<h2>Idea details</h2><p class="muted">No idea selected</p>';return}const url=safeUrl(p.url);$('detail').innerHTML=`<h2>${esc(p.product||'Product not reviewed')}</h2><div class="actions"><a href="${esc(url)}" target="_blank" rel="noopener noreferrer">Open original post</a><button id="previous" title="Previous idea" aria-label="Previous idea">&#8592;</button><button id="next" title="Next idea" aria-label="Next idea">&#8594;</button></div>${picture(p,true)}<dl><dt>Published</dt><dd>${esc(p.posted_at||'Unverified')}</dd><dt>Views</dt><dd>${num(p.views)}</dd><dt>Likes</dt><dd>${num(p.likes)}</dd><dt>Comments</dt><dd>${num(p.comments)}</dd><dt>Shares</dt><dd>${num(p.shares)}</dd></dl>${field('Decision','decision',['Review','Save','Test','Pass'])}${field('Product','product')}${field('Account','account')}${field('Account type','account_type',['Unverified','Product seller','Affiliate creator','Brand','Other'])}<h3>Why save this idea?</h3><p class="muted">${esc(p.notes||'No rationale reviewed yet.')}</p><label for="notes">Review notes</label><textarea id="notes" data-key="notes">${esc(p.notes)}</textarea><details><summary>Creative and audience</summary>${field('Hook','hook')}${field('Format','format')}${field('Offer','offer')}${field('Audience','audience')}${field('Awareness stage','awareness',['Unreviewed','Unaware','Problem aware','Solution aware','Product aware','Most aware'])}${field('Market sophistication','sophistication',['Unreviewed','1 - First clear promise','2 - Stronger promise','3 - Explain the mechanism','4 - Improve the mechanism','5 - Identity and belief'])}<label for="strategy">Supporting words or timestamp</label><textarea data-key="strategy_evidence" id="strategy">${esc(p.strategy_evidence)}</textarea></details><details><summary>Source caption</summary><p class="caption">${esc(p.caption)}</p></details><details><summary>Evidence edits</summary>${field('Product image URL','image_url')}${field('Published time with timezone','posted_at')}${field('Seller URL','seller_url')}${field('Buyer questions observed','buyer_questions')}</details>`;$('detail').querySelectorAll('[data-key]').forEach(el=>el.onchange=()=>{p[el.dataset.key]=el.value;render()});const rows=visible(),index=rows.findIndex(r=>r.url===selected);$('previous').disabled=index<=0;$('next').disabled=index>=rows.length-1;$('previous').onclick=()=>{selected=rows[index-1].url;render()};$('next').onclick=()=>{selected=rows[index+1].url;render()}}
-function download(name,content,type){const a=document.createElement('a'),url=URL.createObjectURL(new Blob([content],{type}));a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
-$('share').onclick=()=>{const html=document.documentElement.outerHTML;const updated=html.replace(/(<script id="evidence" type="application\/json">)[\s\S]*?(<\/script>)/,(_,start,end)=>start+JSON.stringify({...data,posts}).replace(/</g,'\\u003c')+end);download('Product_Review.html','<!doctype html>\n'+updated,'text/html')};
-$('csv').onclick=()=>{const cols=['product','platform','account','url','views','likes','comments','shares','posted_at','decision','notes','hook','format','offer','awareness','sophistication','strategy_evidence'];const quote=v=>'"'+String(v??'').replace(/^[=+@-]/,"'$&").replace(/"/g,'""')+'"';download('Product_Review.csv','\ufeff'+[cols,...visible().map(p=>cols.map(c=>p[c]))].map(r=>r.map(quote).join(',')).join('\r\n'),'text/csv')};
-$('import').onclick=()=>$('file').click();$('file').onchange=async e=>{try{const incoming=JSON.parse(await e.target.files[0].text()),items=Array.isArray(incoming)?incoming:incoming.posts;if(!Array.isArray(items)||!items.every(p=>p&&safeUrl(p.url)))throw Error('Import requires a posts array with HTTPS post URLs.');for(const p of items){for(const metric of ['views','likes','comments','shares']){if(p[metric]===undefined||p[metric]===''||p[metric]===null)p[metric]=null;else if(!Number.isFinite(Number(p[metric]))||Number(p[metric])<0)throw Error('Invalid '+metric+' metric.');else p[metric]=Number(p[metric]);}p.account=p.account||'Unverified';p.platform=p.platform||'Other';p.product=p.product||'';p.caption=p.caption||'';p.giveaway=/giveaway|to enter|winner will/i.test(p.caption);p.keyword_cta=/comment.{0,60}(send|link|prime|chat|shop)|type.{0,30}shop/i.test(p.caption);}const existing=new Map(posts.map(p=>[p.url,p]));items.forEach(p=>existing.set(p.url,{...p,decision:existing.get(p.url)?.decision||p.decision||'Review',notes:existing.get(p.url)?.notes||p.notes||''}));posts=[...existing.values()];data.captured_at=incoming.captured_at||data.captured_at;$('message').textContent='Imported '+items.length+' evidence posts.';render()}catch(error){$('message').textContent=error.message}finally{e.target.value=''}};
-const baseRender=render;render=function(){baseRender();$('counts').innerHTML=$('counts').innerHTML.replace('Verified account names','Named accounts');const now=Date.now(),fresh=posts.filter(p=>typeof p.posted_at==='string'&&/(Z|[+-]\d\d:?\d\d)$/.test(p.posted_at)&&now-Date.parse(p.posted_at)>=0&&now-Date.parse(p.posted_at)<=86400000).length;$('notice').textContent=fresh?fresh+' posts published within 24 hours. Seller identity, repeat performance and paid potential still require review.':'No dated same-day posts in this snapshot. Older or undated records remain in All evidence.';$('csv').disabled=visible().length===0;};
-['search','platform','window','decision','seller'].forEach(id=>$(id).addEventListener('input',render));$('ideas').onclick=()=>{mode='ideas';render()};$('accounts').onclick=()=>{mode='accounts';render()};render();
-</script></body></html>
+(function(){
+'use strict';
+const DECISIONS=['Review','Save','Test','Pass'];
+const DECISION_HINT={Review:'Undecided',Save:'Worth keeping',Test:'Run a test',Pass:'Not for us'};
+const SELLER_TYPES=['Unverified','Product seller','Affiliate creator','Brand','Other'];
+const AWARENESS=['Unreviewed','Unaware','Problem aware','Solution aware','Product aware','Most aware'];
+const SOPHISTICATION=['Unreviewed','1 - First clear promise','2 - Stronger promise','3 - Explain mechanism','4 - Improve mechanism','5 - Identity and belief'];
+const METRICS=['views','likes','comments','shares','saves'];
+const EDITABLE=['decision','notes','product','account','account_type','profile_url','seller_url','image_url','posted_at','hook','hook_timestamp','transcript','format','offer','audience','awareness','sophistication','strategy_evidence','buyer_questions','comparables_text'];
+const STORE_KEY='product-review:v2:'+location.pathname;
+const PRISTINE='<!doctype html>\n'+document.documentElement.outerHTML;
+const $=id=>document.getElementById(id);
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt=v=>v==null?null:Number(v)>=1e6?(Number(v)/1e6).toFixed(Number(v)>=1e7?0:1)+'M':Number(v)>=1e4?Math.round(Number(v)/1e3)+'K':Number(v).toLocaleString();
+const safeUrl=v=>{try{const u=new URL(String(v||''));return u.protocol==='https:'?u.href:''}catch{return ''}};
+const hasTz=v=>typeof v==='string'&&/T.*(Z|[+-]\d\d:?\d\d)$/.test(v)&&!isNaN(Date.parse(v));
+const ageHours=p=>hasTz(p.posted_at)?(Date.now()-Date.parse(p.posted_at))/36e5:null;
+const legacySoph={'3 - Explain the mechanism':'3 - Explain mechanism','4 - Improve the mechanism':'4 - Improve mechanism'};
+
+// ---------- storage (fails safely) ----------
+const store={get(){try{return JSON.parse(localStorage.getItem(STORE_KEY)||'{}')}catch{return {}}},set(v){try{localStorage.setItem(STORE_KEY,JSON.stringify(v));return true}catch{return false}},clear(){try{localStorage.removeItem(STORE_KEY)}catch{}}};
+
+// ---------- data ----------
+let data;
+try{data=JSON.parse($('evidence').textContent)}catch{data={posts:[]}}
+const imports={get(){try{return JSON.parse(localStorage.getItem(STORE_KEY+':imports')||'[]')}catch{return []}},set(v){try{localStorage.setItem(STORE_KEY+':imports',JSON.stringify(v));return true}catch{return false}},clear(){try{localStorage.removeItem(STORE_KEY+':imports')}catch{}}};
+let posts,edits;
+function load(){
+  posts=(data.posts||[]).map(normalize);
+  const seen=new Set(posts.map(p=>p.url));
+  for(const p of imports.get()){const n=normalize(p);if(n.url&&!seen.has(n.url)){posts.push(n);seen.add(n.url)}}
+  edits=store.get();applyEdits();
+}
+load();
+
+function normalize(p){
+  const o={...p};
+  o.url=safeUrl(o.url);
+  o.platform=o.platform||platformFromUrl(o.url);
+  o.account=o.account||'Unverified';
+  o.account_type=SELLER_TYPES.includes(o.account_type)?o.account_type:(o.account_type||'Unverified');
+  o.decision=DECISIONS.includes(o.decision)?o.decision:'Review';
+  o.awareness=AWARENESS.includes(o.awareness)?o.awareness:'Unreviewed';
+  o.sophistication=legacySoph[o.sophistication]||o.sophistication;
+  if(!SOPHISTICATION.includes(o.sophistication))o.sophistication='Unreviewed';
+  for(const m of METRICS){o[m]=(o[m]===''||o[m]==null||!isFinite(Number(o[m]))||Number(o[m])<0)?null:Number(o[m])}
+  if(!Array.isArray(o.comparables))o.comparables=[];
+  if(o.comparables_text==null)o.comparables_text=o.comparables.map(c=>typeof c==='string'?c:c.url).filter(Boolean).join('\n');
+  for(const k of ['hook','format'])if(o[k]==='Not reviewed')o[k]='';
+  const cap=String(o.caption||'');
+  if(o.giveaway==null)o.giveaway=/giveaway|to enter|winner will/i.test(cap);
+  if(o.keyword_cta==null)o.keyword_cta=/comment.{0,60}(send|link|prime|chat|shop)|type.{0,30}shop/i.test(cap);
+  return o;
+}
+function platformFromUrl(u){try{const h=new URL(u).hostname;return /instagram/.test(h)?'Instagram':/tiktok/.test(h)?'TikTok':/youtube|youtu\.be/.test(h)?'YouTube':/facebook/.test(h)?'Facebook':'Other'}catch{return 'Other'}}
+function applyEdits(){for(const p of posts){const e=edits[p.url];if(e)Object.assign(p,e)}}
+function saveEdit(p,key,value){
+  p[key]=value;p.reviewed_at=new Date().toISOString();
+  edits[p.url]={...(edits[p.url]||{}),[key]:value,reviewed_at:p.reviewed_at};
+  if(!store.set(edits))say('Browser storage is unavailable. Edits last until this tab closes; export a snapshot to keep them.','err');
+}
+
+// ---------- state ----------
+const prefs=(()=>{try{return JSON.parse(localStorage.getItem(STORE_KEY+':ui')||'{}')}catch{return {}}})();
+const state={view:'products',q:'',age:prefs.age||'24',platform:'',seller:'',status:'',account:'',selected:prefs.selected||null};
+function savePrefs(){try{localStorage.setItem(STORE_KEY+':ui',JSON.stringify({age:state.age,selected:state.selected}))}catch{}}
+
+function matches(p,ignoreStatus){
+  if(state.platform&&p.platform!==state.platform)return false;
+  if(state.seller&&p.account_type!==state.seller)return false;
+  if(!ignoreStatus&&state.status&&p.decision!==state.status)return false;
+  if(state.account&&p.platform+':'+p.account!==state.account)return false;
+  if(state.age!=='all'){const a=ageHours(p);if(a==null||a<0||a>Number(state.age))return false}
+  if(state.q){const hay=[p.product,p.account,p.caption,p.hook,p.notes,p.platform].join(' ').toLowerCase();if(!state.q.toLowerCase().split(/\s+/).every(w=>hay.includes(w)))return false}
+  return true;
+}
+function visible(){
+  return posts.filter(p=>matches(p)).sort((a,b)=>{
+    const fa=isFresh(a),fb=isFresh(b);if(fa!==fb)return fa?-1:1;
+    return (b.views??-1)-(a.views??-1)||(b.likes??-1)-(a.likes??-1);
+  });
+}
+const isFresh=p=>{const a=ageHours(p);return a!=null&&a>=0&&a<=24};
+
+// ---------- rationale ----------
+function signals(p){
+  const s=[];const a=ageHours(p);
+  if(p.giveaway)s.push(['bad','Giveaway post. Engagement comes from entries, not buying interest. Leave it out of demand comparisons.']);
+  if(a==null)s.push(['warn','Publication time is not verified, so this cannot count as a same-day result.']);
+  else if(a<=24)s.push(['good','Published '+relTime(p.posted_at)+', inside the 24-hour window.']);
+  else s.push(['info','Published '+relTime(p.posted_at)+'. Older than 24 hours.']);
+  if(p.views==null)s.push(['warn','Views are unavailable. Reach is not verified.']);
+  else if(p.views>=1e6)s.push(['good',fmt(p.views)+' verified views. Very high reach.']);
+  else if(p.views>=1e5)s.push(['good',fmt(p.views)+' verified views.']);
+  else s.push(['info',fmt(p.views)+' views. Modest reach so far.']);
+  if(p.views&&p.likes!=null){const r=p.likes/p.views*100;s.push([r>=5?'good':'info','Likes are '+r.toFixed(1)+'% of views.'])}
+  if(p.keyword_cta)s.push(['warn','The caption asks people to comment a keyword to get a link. That inflates comment counts, so comments are not a clean demand signal.']);
+  if(!p.giveaway&&!p.keyword_cta&&p.comments!=null&&p.likes&&p.comments/p.likes>0.5)s.push(['info','Comments are high relative to likes. Read them for buyer questions before trusting the count.']);
+  if(p.account==='Unverified')s.push(['warn','Account identity is not verified.']);
+  else if(p.account_type==='Product seller')s.push(['good','Account sells the product directly.']);
+  else if(p.account_type==='Unverified')s.push(['info','Account found but seller type not reviewed.']);
+  const n=compList(p).length;
+  if(n>=3)s.push(['good',n+' comparable videos collected. Demand repeats beyond one spike.']);
+  else s.push(['warn',(n?'Only '+n+' comparable video'+(n>1?'s':''):'No comparable videos')+' yet. One viral post can be a fluke; look for 3 or more.']);
+  if(p.awareness==='Unreviewed'||p.sophistication==='Unreviewed')s.push(['info','Awareness stage and market sophistication have not been judged yet.']);
+  s.push(['info','Organic numbers do not show sales or whether paid ads would be profitable.']);
+  return s;
+}
+function relTime(iso){const h=(Date.now()-Date.parse(iso))/36e5;if(h<1)return Math.max(1,Math.round(h*60))+' min ago';if(h<48)return Math.round(h)+' h ago';return Math.round(h/24)+' days ago'}
+function absTime(iso){return hasTz(iso)?new Date(iso).toLocaleString(undefined,{dateStyle:'medium',timeStyle:'short'}):'Unverified'}
+function compList(p){return String(p.comparables_text||'').split(/\s+/).map(safeUrl).filter(Boolean)}
+function compMeta(p,url){return (p.comparables||[]).find(c=>c&&typeof c==='object'&&c.url===url)||{}}
+
+// ---------- rendering ----------
+function thumb(p,cls){const src=safeUrl(p.image_url);return src?`<img class="${cls}" src="${esc(src)}" alt="" loading="lazy" referrerpolicy="no-referrer" data-fallback="${cls}">`:`<div class="${cls}">No image</div>`}
+function fixImages(root){root.querySelectorAll('img[data-fallback]').forEach(im=>im.addEventListener('error',()=>{const d=document.createElement('div');d.className=im.dataset.fallback;d.textContent='Image unavailable';im.replaceWith(d)},{once:true}))}
+
+function renderFilters(){
+  const plats=[...new Set(posts.map(p=>p.platform))].sort();
+  $('f-platform').innerHTML='<option value="">All platforms</option>'+plats.map(x=>`<option ${x===state.platform?'selected':''}>${esc(x)}</option>`).join('');
+  const sellers=[...new Set([...SELLER_TYPES,...posts.map(p=>p.account_type)])];
+  $('f-seller').innerHTML='<option value="">All seller types</option>'+sellers.map(x=>`<option ${x===state.seller?'selected':''}>${esc(x)}</option>`).join('');
+  $('f-age').value=state.age;
+  const base=posts.filter(p=>matches(p,true));
+  $('f-status').innerHTML=[['','All'],...DECISIONS.map(d=>[d,d])].map(([v,l])=>`<button class="chip" data-status="${v}" aria-pressed="${state.status===v}">${l}<span class="n">${v?base.filter(p=>p.decision===v).length:base.length}</span></button>`).join('');
+}
+
+function renderProgress(){
+  const accts=new Set(posts.filter(p=>p.account!=='Unverified').map(p=>p.platform+':'+p.account));
+  const freshAccts=new Set(posts.filter(p=>p.account!=='Unverified'&&isFresh(p)&&p.views!=null&&!p.giveaway).map(p=>p.platform+':'+p.account));
+  const withViews=posts.filter(p=>p.views!=null).length;
+  const dated=posts.filter(p=>hasTz(p.posted_at)).length;
+  const reviewed=posts.filter(p=>p.decision!=='Review').length;
+  const pct=n=>Math.min(100,n);
+  $('progress').innerHTML=
+    `<span title="Distinct named accounts with a dated post under 24h old, verified views and no giveaway">Qualified accounts <b>${freshAccts.size}</b> / 100<span class="meter"><i style="width:${pct(freshAccts.size)}%"></i></span></span>`+
+    `<span>Named accounts <b>${accts.size}</b></span>`+
+    `<span>Posts <b>${posts.length}</b></span>`+
+    `<span>Verified views <b>${withViews}</b> of ${posts.length}</span>`+
+    `<span>Dated <b>${dated}</b> of ${posts.length}</span>`+
+    `<span>Decided <b>${reviewed}</b></span>`;
+}
+
+function renderList(){
+  const rows=visible();
+  if(!rows.some(p=>p.url===state.selected))state.selected=rows[0]?.url||null;
+  $('list-count').innerHTML=esc(rows.length+(rows.length===1?' product':' products'))+(state.account?` · <button class="chip" data-act="clear-account" aria-label="Remove account filter ${esc(state.account)}">${esc(state.account.split(':').slice(1).join(':'))} ✕</button>`:'');
+  if(!rows.length){
+    const saved=state.age;state.age='all';const hidden=saved==='all'?0:posts.filter(p=>matches(p)).length;state.age=saved;
+    $('list').innerHTML=`<li class="empty"><h2>Nothing matches this view</h2><p>${state.age!=='all'&&hidden?`${hidden} item${hidden>1?'s are':' is'} older or missing a verified publish time, so ${hidden>1?'they stay':'it stays'} out of the ${state.age==='24'?'24-hour':'recent'} view.`:'Try a different search or filter.'}</p>${state.age!=='all'&&hidden?'<button class="btn" data-act="show-all">Show older and undated evidence</button> ':''}${state.q||state.platform||state.seller||state.status||state.account?'<button class="btn ghost" data-act="clear">Clear filters</button>':''}</li>`;
+  }else{
+    let html='',group=null;
+    for(const p of rows){
+      const g=isFresh(p)?'Published in last 24 hours':'Older or undated';
+      if(state.age!=='24'&&g!==group){html+=`<li class="group-label" role="presentation">${g}</li>`;group=g}
+      const flag=p.giveaway?'Giveaway':p.keyword_cta?'Keyword CTA':'';
+      const kpi=p.views!=null?`<b>${fmt(p.views)}</b>views`:p.likes!=null?`<b>${fmt(p.likes)}</b>likes`:'<b>–</b>no data';
+      html+=`<li role="option" id="opt-${hash(p.url)}" aria-selected="${p.url===state.selected}" class="row" data-url="${esc(p.url)}">${thumb(p,'thumb')}<div style="min-width:0"><div class="row-title">${esc(p.product||'Product not identified')}</div><div class="row-sub">${esc(p.platform)} · ${esc(p.account)} · ${hasTz(p.posted_at)?esc(relTime(p.posted_at)):'undated'}</div><span class="pill ${p.decision}">${p.decision}</span>${flag?` <span class="pill flag">${flag}</span>`:''}</div><div class="row-kpi">${kpi}</div></li>`;
+    }
+    $('list').innerHTML=html;
+    const sel=$('list').querySelector('[aria-selected=true]');
+    if(sel){$('list').setAttribute('aria-activedescendant',sel.id);sel.scrollIntoView({block:'nearest'})}
+  }
+  fixImages($('list'));
+}
+function hash(s){let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))|0;return (h>>>0).toString(36)}
+
+function kpi(label,v,note){return v==null?`<div class="kpi na"><span>${label}</span><b>Unavailable</b>${note?`<em>${note}</em>`:''}</div>`:`<div class="kpi"><span>${label}</span><b>${fmt(v)}</b>${note?`<em>${note}</em>`:''}</div>`}
+function input(key,label,opts={}){
+  const p=current(),id='e-'+key,v=p[key]??'';
+  let ctl;
+  if(opts.options)ctl=`<select class="in" id="${id}" data-key="${key}">${opts.options.map(o=>`<option ${o===v?'selected':''}>${esc(o)}</option>`).join('')}</select>`;
+  else if(opts.area)ctl=`<textarea class="in" id="${id}" data-key="${key}" placeholder="${esc(opts.ph||'')}">${esc(v)}</textarea>`;
+  else ctl=`<input class="in" id="${id}" data-key="${key}" value="${esc(v)}" placeholder="${esc(opts.ph||'')}"${opts.type?` type="${opts.type}"`:''}>`;
+  return `<label class="f" for="${id}">${label}</label>${ctl}${opts.hint?`<div class="hint">${opts.hint}</div>`:''}`;
+}
+function current(){return posts.find(p=>p.url===state.selected)}
+
+function renderDetail(){
+  const p=current(),el=$('detail');
+  if(!p){el.innerHTML='<div class="empty" style="padding-top:120px"><h2>No product selected</h2><p>Choose a product from the list.</p></div>';return}
+  const rows=visible(),i=rows.findIndex(r=>r.url===p.url);
+  const post=safeUrl(p.url),prof=safeUrl(p.profile_url),shop=safeUrl(p.seller_url);
+  const comps=compList(p);
+  const er=p.views&&(p.likes!=null||p.comments!=null||p.shares!=null)?(((p.likes||0)+(p.comments||0)+(p.shares||0))/p.views*100).toFixed(1)+'%':null;
+  el.innerHTML=`
+  <div class="detail-bar">
+    <button class="icon-btn back" data-act="close" aria-label="Back to list">‹</button>
+    <button class="icon-btn" data-act="prev" aria-label="Previous product" ${i<=0?'disabled':''}>↑</button>
+    <button class="icon-btn" data-act="next" aria-label="Next product" ${i<0||i>=rows.length-1?'disabled':''}>↓</button>
+    <span class="pos">${i+1} of ${rows.length}</span>
+  </div>
+  <div class="detail-body">
+    <div class="hero">
+      ${thumb(p,'hero-img')}
+      <div>
+        <div class="eyebrow">${esc(p.platform)} · ${esc(p.account_type)}</div>
+        <h2>${esc(p.product||'Product not identified')}</h2>
+        <div style="color:var(--text-2);font-size:14px">${esc(p.account)} · ${hasTz(p.posted_at)?esc(absTime(p.posted_at))+' ('+esc(relTime(p.posted_at))+')':'Publish time unverified'}</div>
+        <div class="links">
+          ${post?`<a class="link-btn" href="${esc(post)}" target="_blank" rel="noopener noreferrer">Watch original post ↗</a>`:''}
+          ${prof?`<a class="link-btn secondary" href="${esc(prof)}" target="_blank" rel="noopener noreferrer">Profile ↗</a>`:'<span class="link-btn off">Profile not linked</span>'}
+          ${shop?`<a class="link-btn secondary" href="${esc(shop)}" target="_blank" rel="noopener noreferrer">Store ↗</a>`:'<span class="link-btn off">Store not linked</span>'}
+        </div>
+      </div>
+    </div>
+
+    <div class="decide" role="group" aria-label="Decision">
+      ${DECISIONS.map((d,k)=>`<button data-d="${d}" aria-pressed="${p.decision===d}" title="Shortcut: ${'rstp'[k].toUpperCase()}">${d}<small>${DECISION_HINT[d]}</small></button>`).join('')}
+    </div>
+    <p class="reviewed-at">${p.reviewed_at?'Last reviewed '+esc(absTime(p.reviewed_at)):'Not reviewed yet'}</p>
+
+    <h3>Performance</h3>
+    <div class="kpis">
+      ${kpi('Views',p.views)}${kpi('Likes',p.likes)}${kpi('Comments',p.comments,p.keyword_cta?'Keyword CTA inflates':'')}${kpi('Shares',p.shares)}${kpi('Saves',p.saves)}${er?`<div class="kpi"><span>Engagement</span><b>${er}</b><em>of views</em></div>`:''}
+    </div>
+    <div class="facts">${p.captured_at?'Counts captured '+esc(absTime(p.captured_at)||p.captured_at)+'. ':'Capture time not recorded. '}Missing numbers are unavailable, not zero.</div>
+
+    <h3>Why it's here</h3>
+    <ul class="signals">${signals(p).map(([t,m])=>`<li><span class="ic ${t}" aria-hidden="true">${t==='good'?'✓':t==='bad'?'✕':t==='warn'?'!':'i'}</span><span><span class="sr">${t==='good'?'Strength: ':t==='bad'?'Exclude: ':t==='warn'?'Caution: ':'Note: '}</span>${esc(m)}</span></li>`).join('')}</ul>
+    ${input('notes','Your rationale',{area:true,ph:'In plain words: why save, test or pass?'})}
+
+    <h3>Comparable videos <span style="font-weight:400;color:var(--text-3);font-size:14px">${comps.length}</span></h3>
+    ${comps.length?`<ul class="cluster">${comps.map(u=>{const m=compMeta(p,u);return `<li><a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(m.account||platformFromUrl(u)+' video')} ↗</a><span>${m.views!=null?fmt(m.views)+' views':''}${m.posted_at&&hasTz(m.posted_at)?' · '+esc(relTime(m.posted_at)):''}</span></li>`}).join('')}</ul>`:'<div class="card" style="font-size:14px;color:var(--text-2)">None collected. Add other videos of this product from different accounts to check the demand repeats.</div>'}
+
+    <h3>Market judgment</h3>
+    <div class="grid2">
+      <div>${input('awareness','Awareness stage',{options:AWARENESS})}</div>
+      <div>${input('sophistication','Market sophistication',{options:SOPHISTICATION})}</div>
+    </div>
+    ${input('hook','Opening hook (exact words)',{ph:'What is said or shown in the first seconds'})}
+    <div class="grid2">
+      <div>${input('hook_timestamp','Timestamp',{ph:'e.g. 0:00–0:03'})}</div>
+      <div>${input('format','Format',{ph:'e.g. Demo, unboxing, problem/solution'})}</div>
+    </div>
+    ${input('strategy_evidence','Supporting evidence for the judgment',{area:true,ph:'Quote the transcript lines and timestamps that show the stage and sophistication'})}
+
+    <details class="adv"><summary>Source caption and transcript</summary>
+      <div class="card"><div class="eyebrow" style="margin-bottom:6px">Caption</div><div class="quote">${esc(p.caption||'No caption captured.')}</div></div>
+      ${input('transcript','Transcript',{area:true,ph:'Paste the spoken words with timestamps'})}
+    </details>
+    <details class="adv"><summary>Edit evidence</summary>
+      <div class="grid2">
+        <div>${input('product','Product')}</div>
+        <div>${input('account','Account handle')}</div>
+        <div>${input('account_type','Seller type',{options:[...new Set([...SELLER_TYPES,p.account_type])]})}</div>
+        <div>${input('posted_at','Published (ISO time with timezone)',{ph:'2026-10-13T14:05:00Z',hint:hasTz(p.posted_at)||!p.posted_at?'':'Needs a timezone, e.g. Z or +01:00'})}</div>
+        <div>${input('profile_url','Profile URL',{type:'url'})}</div>
+        <div>${input('seller_url','Store URL',{type:'url'})}</div>
+        <div>${input('offer','Offer')}</div>
+        <div>${input('audience','Audience')}</div>
+      </div>
+      ${input('image_url','Product image URL',{type:'url'})}
+      ${input('buyer_questions','Buyer questions seen in comments',{area:true})}
+      ${input('comparables_text','Comparable video URLs (one per line)',{area:true,ph:'https://www.tiktok.com/@account/video/…'})}
+      ${p.image_source?`<p class="hint">Image source: <a href="${esc(safeUrl(p.image_source))}" target="_blank" rel="noopener noreferrer">${esc(p.image_source)}</a></p>`:''}
+    </details>
+
+    <div class="shortcuts hide-sm"><kbd>↑</kbd><kbd>↓</kbd> or <kbd>J</kbd><kbd>K</kbd> move · <kbd>R</kbd> Review · <kbd>S</kbd> Save · <kbd>T</kbd> Test · <kbd>P</kbd> Pass · <kbd>O</kbd> open post · <kbd>/</kbd> search</div>
+  </div>`;
+  fixImages(el);
+}
+
+function renderAccounts(){
+  const groups=new Map();
+  for(const p of posts.filter(p=>matches(p))){if(p.account==='Unverified')continue;const k=p.platform+':'+p.account;if(!groups.has(k))groups.set(k,[]);groups.get(k).push(p)}
+  const unv=posts.filter(p=>matches(p)&&p.account==='Unverified').length;
+  const cards=[...groups].sort((a,b)=>b[1].length-a[1].length).map(([k,g])=>{
+    const f=g[0],prof=g.map(p=>safeUrl(p.profile_url)).find(Boolean),shop=g.map(p=>safeUrl(p.seller_url)).find(Boolean);
+    const prods=new Map();g.forEach(p=>p.product&&prods.set(p.product,(prods.get(p.product)||0)+1));
+    const views=g.map(p=>p.views).filter(v=>v!=null).sort((a,b)=>a-b);
+    const med=views.length?views[Math.floor(views.length/2)]:null;
+    return `<article class="acct"><div class="eyebrow">${esc(f.platform)} · ${esc(f.account_type)}</div><h2>${esc(f.account)}</h2>
+      <p>${g.length} post${g.length>1?'s':''} · ${g.filter(isFresh).length} in last 24 h · median views ${med==null?'unavailable':fmt(med)}</p>
+      <p>${g.filter(p=>p.giveaway).length} giveaways · ${g.filter(p=>p.keyword_cta).length} keyword CTAs</p>
+      <p>Products: ${esc([...prods].map(([n,c])=>c>1?n+' ×'+c:n).join(', ')||'Not identified')}</p>
+      <div class="links">${prof?`<a class="link-btn secondary" href="${esc(prof)}" target="_blank" rel="noopener noreferrer">Profile ↗</a>`:''}${shop?`<a class="link-btn secondary" href="${esc(shop)}" target="_blank" rel="noopener noreferrer">Store ↗</a>`:''}<button class="btn" data-acct="${esc(k)}">View posts</button></div></article>`;
+  });
+  $('accounts').innerHTML=cards.length?cards.join(''):`<div class="acct" style="grid-column:1/-1"><div class="empty"><h2>No verified accounts in this view</h2><p>${unv?unv+' post'+(unv>1?'s are':' is')+' from unverified accounts. ':''}Accounts appear once a post's handle has been confirmed. ${state.age!=='all'?'Older and undated evidence is hidden by the date filter.':''}</p>${state.age!=='all'?'<button class="btn" data-act="show-all">Show all evidence</button>':''}</div></div>`;
+}
+
+function renderFoot(){$('foot').textContent='Freshness uses each post’s verified publish time, not when it was collected. Snapshot collected: '+(data.captured_at?absTime(data.captured_at)||data.captured_at:'not recorded')+'. '+(data.limitations||'')+' Public metrics do not establish sales or paid-ad returns.'}
+
+function render(){
+  $('view-products').setAttribute('aria-pressed',state.view==='products');
+  $('view-accounts').setAttribute('aria-pressed',state.view==='accounts');
+  $('products-view').hidden=state.view!=='products';$('accounts-view').hidden=state.view!=='accounts';
+  renderFilters();renderProgress();
+  if(state.view==='products'){renderList();renderDetail()}else renderAccounts();
+  renderFoot();savePrefs();
+}
+function renderKeepFocus(){const a=document.activeElement,id=a&&a.id;render();if(id&&$(id))$(id).focus()}
+
+// ---------- interaction ----------
+function select(url,{open}={}){state.selected=url;renderList();renderDetail();if(open&&matchMedia('(max-width:900px)').matches){$('detail').classList.add('open');$('detail').focus()}}
+function move(d){const rows=visible(),i=rows.findIndex(r=>r.url===state.selected),n=rows[Math.max(0,Math.min(rows.length-1,i+d))];if(n)select(n.url)}
+function decide(d){const p=current();if(!p)return;saveEdit(p,'decision',d);say(`Marked “${p.product||'item'}” as ${d}.`);render()}
+let sayTimer;function say(msg,kind){clearTimeout(sayTimer);$('status').innerHTML=`<div class="${kind||''}">${esc(msg)}</div>`;sayTimer=setTimeout(()=>$('status').innerHTML='',kind==='err'?9000:3500)}
+
+$('q').addEventListener('input',e=>{state.q=e.target.value;renderFilters();renderList();renderDetail();renderAccountsIf()});
+function renderAccountsIf(){if(state.view==='accounts')renderAccounts()}
+$('f-age').addEventListener('change',e=>{state.age=e.target.value;render()});
+$('f-platform').addEventListener('change',e=>{state.platform=e.target.value;render()});
+$('f-seller').addEventListener('change',e=>{state.seller=e.target.value;render()});
+$('f-status').addEventListener('click',e=>{const b=e.target.closest('[data-status]');if(b){state.status=b.dataset.status;renderKeepFocus()}});
+$('view-products').onclick=()=>{state.view='products';render()};
+$('view-accounts').onclick=()=>{state.view='accounts';state.account='';render()};
+$('list').addEventListener('click',e=>{const r=e.target.closest('[data-url]');if(r)select(r.dataset.url,{open:true});act(e)});
+$('list-count').addEventListener('click',act);
+$('accounts').addEventListener('click',e=>{const b=e.target.closest('[data-acct]');if(b){state.account=b.dataset.acct;state.view='products';render()}act(e)});
+$('detail').addEventListener('click',e=>{const d=e.target.closest('[data-d]');if(d)decide(d.dataset.d);act(e)});
+$('detail').addEventListener('change',e=>{
+  const el=e.target.closest('[data-key]');if(!el)return;const p=current();if(!p)return;
+  let v=el.value;const k=el.dataset.key;
+  if(/_url$/.test(k)&&v&&!safeUrl(v)){say('Links must start with https://','err');el.value=p[k]||'';return}
+  if(k==='posted_at'&&v&&!hasTz(v))say('Saved, but this time has no timezone, so it will not count as fresh.','err');
+  saveEdit(p,k,v);renderKeepFocus();
+});
+function act(e){const b=e.target.closest('[data-act]');if(!b)return;const a=b.dataset.act;
+  if(a==='show-all'){state.age='all';render()}
+  else if(a==='clear'){Object.assign(state,{q:'',platform:'',seller:'',status:'',account:''});$('q').value='';render()}
+  else if(a==='clear-account'){state.account='';render();$('list').focus()}
+  else if(a==='prev')move(-1);else if(a==='next')move(1);
+  else if(a==='close')closeDetail()}
+function closeDetail(){$('detail').classList.remove('open');const s=$('list').querySelector('[aria-selected=true]');(s||$('list')).focus()}
+
+document.addEventListener('keydown',e=>{
+  const t=e.target,typing=/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)||t.isContentEditable;
+  if(e.key==='Escape'){if($('export-menu').classList.contains('open')){toggleMenu(false);$('export-btn').focus();return}if(typing){t.blur();return}if($('detail').classList.contains('open')){closeDetail();return}}
+  if(typing||e.metaKey||e.ctrlKey||e.altKey||state.view!=='products')return;
+  const k=e.key.toLowerCase();
+  if(k==='/'){e.preventDefault();$('q').focus()}
+  else if(k==='arrowdown'||k==='j'){e.preventDefault();move(1)}
+  else if(k==='arrowup'||k==='k'){e.preventDefault();move(-1)}
+  else if(k==='enter'&&t===$('list')){select(state.selected,{open:true})}
+  else if(k==='o'){const p=current();if(p&&safeUrl(p.url))window.open(p.url,'_blank','noopener')}
+  else{const d={r:'Review',s:'Save',t:'Test',p:'Pass'}[k];if(d&&current()){e.preventDefault();decide(d)}}
+});
+
+// export menu
+function toggleMenu(open){$('export-menu').classList.toggle('open',open);$('export-btn').setAttribute('aria-expanded',open);if(open)$('export-menu').querySelector('button').focus()}
+$('export-btn').onclick=()=>toggleMenu(!$('export-menu').classList.contains('open'));
+document.addEventListener('click',e=>{if(!e.target.closest('.menu'))toggleMenu(false)});
+$('export-menu').addEventListener('keydown',e=>{const items=[...$('export-menu').querySelectorAll('button')],i=items.indexOf(document.activeElement);if(e.key==='ArrowDown'){e.preventDefault();items[(i+1)%items.length].focus()}if(e.key==='ArrowUp'){e.preventDefault();items[(i-1+items.length)%items.length].focus()}});
+$('export-menu').addEventListener('click',e=>{const b=e.target.closest('[data-export]');if(!b)return;toggleMenu(false);({html:exportHtml,json:exportJson,csv:exportCsv,reset:resetEdits})[b.dataset.export]()});
+
+function snapshot(){
+  return {...data,posts:posts.map(p=>{const o={...p};o.comparables=mergeComparables(p);delete o.comparables_text;return o}),reviewed_at:new Date().toISOString()};
+}
+function mergeComparables(p){const urls=compList(p);return urls.map(u=>({url:u,...compMeta(p,u)}))}
+function stamp(){return new Date().toISOString().slice(0,16).replace(/[:T]/g,'-')}
+function download(name,content,type){const a=document.createElement('a'),u=URL.createObjectURL(new Blob([content],{type}));a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1500)}
+function exportHtml(){
+  const json=JSON.stringify(snapshot()).replace(/</g,'\\u003c');
+  const out=PRISTINE.replace(/(<script id="evidence" type="application\/json">)[\s\S]*?(<\/script>)/,(_,a,b)=>a+json+b);
+  download('Product_Review_reviewed_'+stamp()+'.html',out,'text/html');say('Exported a reviewed snapshot. It opens anywhere with your decisions included.');
+}
+function exportJson(){download('Product_Review_'+stamp()+'.json',JSON.stringify(snapshot(),null,2),'application/json');say('Exported reviewed data.')}
+function exportCsv(){
+  const cols=['product','decision','platform','account','account_type','url','profile_url','seller_url','views','likes','comments','shares','saves','posted_at','captured_at','awareness','sophistication','hook','hook_timestamp','strategy_evidence','format','offer','notes','giveaway','keyword_cta','comparables_text','image_url'];
+  const q=v=>'"'+String(v??'').replace(/^[=+@\-\t\r]/,"'$&").replace(/"/g,'""')+'"';
+  const rows=visible();
+  download('Product_Review_view_'+stamp()+'.csv','﻿'+[cols,...rows.map(p=>cols.map(c=>p[c]))].map(r=>r.map(q).join(',')).join('\r\n'),'text/csv');
+  say('Exported '+rows.length+' rows from the current view.');
+}
+function resetEdits(){if(!confirm('Clear your local decisions, notes and imported rows for this file? Exported snapshots are not affected.'))return;store.clear();imports.clear();state.account='';load();render();say('Local edits cleared.')}
+
+// import
+$('import-btn').onclick=()=>$('file').click();
+$('file').onchange=async e=>{
+  const f=e.target.files[0];if(!f)return;
+  try{
+    const text=await f.text();
+    let incoming=/\.csv$/i.test(f.name)?{posts:parseCsv(text)}:JSON.parse(text);
+    const items=Array.isArray(incoming)?incoming:incoming.posts;
+    if(!Array.isArray(items))throw Error('Import needs a JSON “posts” array or a CSV with a url column.');
+    const bad=items.findIndex(p=>!p||!safeUrl(p.url));
+    if(bad>=0)throw Error('Row '+(bad+1)+' has no https post URL. Nothing was imported.');
+    for(const p of items)for(const m of METRICS){const v=p[m];if(v!=null&&v!==''&&(!isFinite(Number(String(v).replace(/,/g,'')))||Number(String(v).replace(/,/g,''))<0))throw Error('Row with '+p.url+' has an invalid '+m+' value.');if(typeof v==='string')p[m]=v.replace(/,/g,'')}
+    if(typeof items[0]?.comparables==='string')items.forEach(p=>{p.comparables_text=p.comparables;p.comparables=[]});
+    const byUrl=new Map(posts.map(p=>[p.url,p]));let added=0,updated=0;
+    for(const raw of items){
+      const n=normalize(raw),old=byUrl.get(n.url);
+      if(!old){byUrl.set(n.url,n);added++;continue}
+      updated++;
+      const merged={...old};
+      for(const m of METRICS)if(n[m]!=null)merged[m]=n[m];
+      for(const k of ['caption','posted_at','captured_at','image_url','profile_url','seller_url','product','account','account_type','transcript','hook','format','offer','audience','strategy_evidence','buyer_questions'])if(n[k]&&n[k]!=='Unverified'&&!edits[old.url]?.[k])merged[k]=n[k];
+      const blank={decision:'Review',awareness:'Unreviewed',sophistication:'Unreviewed'};for(const k in blank)if(n[k]!==blank[k]&&old[k]===blank[k])merged[k]=n[k];
+      if(n.notes&&!old.notes)merged.notes=n.notes;
+      const cu=new Set([...compList(old),...compList(n)]);merged.comparables=[...(old.comparables||[]),...(n.comparables||[]).filter(c=>c&&!old.comparables?.some(o=>o.url===c.url))];merged.comparables_text=[...cu].join('\n');
+      merged.giveaway=old.giveaway||n.giveaway;merged.keyword_cta=old.keyword_cta||n.keyword_cta;
+      byUrl.set(n.url,merged);
+    }
+    posts=[...byUrl.values()];
+    const embedded=new Set((data.posts||[]).map(p=>safeUrl(p.url)));
+    const keep=new Map(imports.get().map(p=>[p.url,p]));
+    for(const p of posts)if(!embedded.has(p.url)){const o={...p};delete o.comparables_text;o.comparables=mergeComparables(p);keep.set(p.url,o)}
+    if(!imports.set([...keep.values()]))say('Imported for this session only; browser storage is full or blocked. Export a snapshot to keep it.','err');
+    if(incoming.captured_at)data.captured_at=incoming.captured_at;
+    say(`Imported ${items.length} rows: ${added} new, ${updated} merged. Your existing decisions were kept.`);
+    render();
+  }catch(err){say(err.message||'Import failed.','err')}
+  finally{e.target.value=''}
+};
+function parseCsv(text){
+  const rows=[];let row=[],cell='',q=false;text=text.replace(/^﻿/,'');
+  for(let i=0;i<text.length;i++){const c=text[i];
+    if(q){if(c==='"'){if(text[i+1]==='"'){cell+='"';i++}else q=false}else cell+=c}
+    else if(c==='"')q=true;else if(c===','){row.push(cell);cell=''}else if(c==='\n'||c==='\r'){if(c==='\r'&&text[i+1]==='\n')i++;row.push(cell);rows.push(row);row=[];cell=''}else cell+=c}
+  if(cell||row.length){row.push(cell);rows.push(row)}
+  const [head,...body]=rows.filter(r=>r.some(x=>x.trim()));if(!head)return [];
+  const h=head.map(x=>x.trim());
+  return body.map(r=>{const o={};h.forEach((k,i)=>{let v=r[i]??'';if(/^'[=+@\-]/.test(v))v=v.slice(1);o[k]=v});if(o.giveaway)o.giveaway=/^true$/i.test(o.giveaway);if(o.keyword_cta)o.keyword_cta=/^true$/i.test(o.keyword_cta);return o});
+}
+
+window.addEventListener('storage',e=>{if(e.key===STORE_KEY||e.key===STORE_KEY+':imports'){load();render()}});
+render();
+})();
+</script>
+</body>
+</html>
