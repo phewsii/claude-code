@@ -61,3 +61,9 @@ A qualified account is a named account with a post published within 24 hours, ve
 Organic metrics do not establish sales or paid-ad profitability.
 
 REA assessment source: https://github.com/morluto/rea. TikTok API authorization source: https://developers.tiktok.com/docs/en/tiktok-api-v2-video-list.
+# Live Browser Collection
+
+Read `LIVE_COLLECTION_UPDATE.md` first. The canonical `Evidence.json` now contains 1,816 observations, with 1,597 observed view counters. `TikTok_Verified_Account_Review.csv` contains 100 directly checked public profiles, not 100 qualified viral sellers. There are 126 detail reads and 99 follower counters. Missing values remain unavailable. The rolling 24-hour metric-coverage count changes as evidence ages; it is not proof of virality or paid readiness.
+
+Rebuild with `python3 build_outputs.py` using Python with openpyxl installed. Preserve the existing UI format. Do not replace canonical evidence with the five legacy Meta observations, which are retained separately in `Meta_Legacy_Evidence.json`.
+

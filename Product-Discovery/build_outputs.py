@@ -60,6 +60,8 @@ def embed_html(result, html_path):
 
 
 def age_label(row, now):
+    if content_system.relative_bounds(row):
+        return 'Last 24 h (bounded)' if content_system.in_window(row, now) else 'Outside 24 h / uncertain'
     when = content_system.published(row)
     if not when:
         return 'Undated'
@@ -75,7 +77,7 @@ def why(row):
         parts.append('Keyword CTA inflates comments.')
     if row['views'] is None:
         parts.append('Views unverified.')
-    if not content_system.published(row):
+    if not content_system.published(row) and not content_system.relative_bounds(row):
         parts.append('Publish time unverified.')
     if row['account'] == 'Unverified':
         parts.append('Account unverified.')
@@ -112,6 +114,13 @@ def link(cell, url, text):
         cell.font = Font(color='86868B')
 
 
+def literal(cell, value):
+    cell.value = value
+    if isinstance(value, str):
+        cell.data_type = 's'
+    return cell
+
+
 def dropdown(ws, options, ref):
     dv = DataValidation(type='list', formula1='"' + ','.join(options) + '"', allow_blank=False)
     ws.add_data_validation(dv)
@@ -136,8 +145,8 @@ def build_workbook(result, path):
         n = r - 5
         ideas.row_dimensions[r].height = 78
         ideas.cell(row=r, column=1, value='No image' if not row['image_url'] else '')
-        ideas.cell(row=r, column=2, value=row['product'] or 'Product not identified').font = Font(bold=True, color=INK)
-        ideas.cell(row=r, column=3, value=row.get('decision') or 'Review')
+        literal(ideas.cell(row=r, column=2), row['product'] or 'Product not identified').font = Font(bold=True, color=INK)
+        literal(ideas.cell(row=r, column=3), row.get('decision') or 'Review')
         link(ideas.cell(row=r, column=4), row['url'], 'Watch post')
         link(ideas.cell(row=r, column=5), row['profile_url'], 'Profile')
         link(ideas.cell(row=r, column=6), row['seller_url'], 'Store')
@@ -145,12 +154,12 @@ def build_workbook(result, path):
             ev_col = {'G': 'E', 'H': 'F', 'I': 'G', 'J': 'H'}[key]
             ideas.cell(row=r, column=c, value='=IF(Evidence!%s%d="","Unavailable",Evidence!%s%d)' % (ev_col, r, ev_col, r)).number_format = '#,##0'
         when = content_system.published(row)
-        ideas.cell(row=r, column=11, value=when.strftime('%Y-%m-%d %H:%M UTC') if when else 'Unverified')
+        literal(ideas.cell(row=r, column=11), when.strftime('%Y-%m-%d %H:%M UTC') if when else (row.get('publication_label') + ' at collection (approx.)') if row.get('publication_label') else 'Unverified')
         ideas.cell(row=r, column=12, value=age_label(row, now))
-        ideas.cell(row=r, column=13, value=row.get('awareness') or 'Unreviewed')
-        ideas.cell(row=r, column=14, value=row.get('sophistication') or 'Unreviewed')
+        literal(ideas.cell(row=r, column=13), row.get('awareness') or 'Unreviewed')
+        literal(ideas.cell(row=r, column=14), row.get('sophistication') or 'Unreviewed')
         ideas.cell(row=r, column=15, value=len(row['comparables']))
-        ideas.cell(row=r, column=16, value=why(row))
+        literal(ideas.cell(row=r, column=16), why(row))
         for c in range(1, len(cols) + 1):
             cell = ideas.cell(row=r, column=c)
             cell.alignment = Alignment(vertical='center', wrap_text=c in (2, 16))
@@ -174,8 +183,9 @@ def build_workbook(result, path):
               ('Published', 'posted_at'), ('Collected', 'captured_at'), ('Seller type', 'account_type'), ('Profile URL', 'profile_url'), ('Store URL', 'seller_url'), ('Sampling', 'sampling'),
               ('Hook', 'hook'), ('Hook timestamp', 'hook_timestamp'), ('Format', 'format'), ('Offer', 'offer'), ('Awareness', 'awareness'), ('Sophistication', 'sophistication'), ('Strategy evidence', 'strategy_evidence'),
               ('Transcript', 'transcript'), ('Caption', 'caption'), ('Audience', 'audience'), ('Buyer questions', 'buyer_questions'), ('Giveaway', 'giveaway'), ('Keyword CTA', 'keyword_cta'), ('Comparable URLs', 'comparables'), ('Image URL', 'image_url'), ('Notes', 'notes')]
+    fields += [('Observed publication label', 'publication_label'), ('Date observed at', 'publication_observed_at'), ('Date source', 'publication_source'), ('Pinned', 'is_pinned'), ('Excluded', 'excluded_from_discovery'), ('Followers', 'followers'), ('Followers observed at', 'followers_captured_at'), ('Public profile destination - unverified commerce', 'profile_destination_url')]
     header(ev, 'Post Evidence', 'Source values. Blank metric = unavailable, not zero. Edit judgments on the Ideas sheet or in Product_Review.html.',
-           [f[0] for f in fields], [30, 11, 18, 42, 11, 11, 11, 11, 11, 24, 24, 16, 34, 34, 16, 30, 12, 16, 20, 16, 22, 36, 40, 50, 20, 30, 10, 12, 50, 40, 50])
+           [f[0] for f in fields], [30, 11, 18, 42, 11, 11, 11, 11, 11, 24, 24, 16, 34, 34, 16, 30, 12, 16, 20, 16, 22, 36, 40, 50, 20, 30, 10, 12, 50, 40, 50, 24, 26, 38, 10, 10, 14, 26, 44])
     for r, row in enumerate(posts, start=6):
         for c, (_, key) in enumerate(fields, start=1):
             value = row.get(key)
@@ -183,7 +193,7 @@ def build_workbook(result, path):
                 value = '\n'.join(x['url'] for x in value)
             elif isinstance(value, bool):
                 value = 'Yes' if value else 'No'
-            cell = ev.cell(row=r, column=c, value=value if value not in (None, '') else None)
+            cell = literal(ev.cell(row=r, column=c), value if value not in (None, '') else None)
             if key in ('url', 'profile_url', 'seller_url') and content_system.public_url(value):
                 cell.hyperlink = value
                 cell.font = Font(color=ACCENT, underline='single')
@@ -202,6 +212,7 @@ def build_workbook(result, path):
             ('Named accounts', cov['named_accounts']), ('Posts', cov['posts']), ('Dated posts', cov['dated_posts']),
             ('Posts with product image', cov['with_image']), ('Posts with profile link', cov['with_profile_link']), ('Posts with store link', cov['with_store_link']),
             ('Posts with 3+ comparable videos', cov['with_3plus_comparables']), ('Giveaways excluded', cov['giveaways_excluded'])]
+    rows += [('Posts with bounded relative dates', cov.get('relative_dated_posts', 0))]
     rows += [('%s coverage' % m.capitalize(), '%d%%' % round(v * 100)) for m, v in cov['metric_coverage'].items()]
     for i, (k, v) in enumerate(rows, start=5):
         cv.cell(row=i, column=1, value=k).border = LINE

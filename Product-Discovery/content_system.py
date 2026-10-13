@@ -5,7 +5,7 @@ import json
 import re
 import statistics
 from collections import Counter, defaultdict
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -71,6 +71,9 @@ def number(value):
 def first(*values):
     return next((v for v in values if v not in (None, '')), None)
 
+def truth(value):
+    return value is True or str(value).strip().lower() in ('true', 'yes', '1')
+
 def normalize(source):
     row = {key: first(source.get(key), source.get(alias), provider_value(source, key)) for key, alias in ALIASES.items()}
     row.update({key: first(source.get(key), row.get(key), provider_value(source, key)) or '' for key in TEXT_FIELDS})
@@ -81,9 +84,9 @@ def normalize(source):
     for key in METRICS:
         row[key] = number(first(source.get(key), source.get(ALIASES.get(key)), provider_value(source, key)))
     text = str(row['caption'] or '').lower()
-    row['giveaway'] = bool(re.search(r'giveaway|to enter|win a|winner will', text))
-    row['keyword_cta'] = bool(re.search(r'comment.{0,60}(send|link|prime|chat|shop)|type.{0,30}shop', text))
-    row['offer_signal'] = bool(re.search(r'\$\d|deal|discount|marked down|sale|% off', text))
+    row['giveaway'] = truth(source.get('giveaway')) or bool(re.search(r'giveaway|to enter|win a|winner will', text))
+    row['keyword_cta'] = truth(source.get('keyword_cta')) or bool(re.search(r'comment.{0,60}(send|link|prime|chat|shop)|type.{0,30}shop', text))
+    row['offer_signal'] = truth(source.get('offer_signal')) or bool(re.search(r'\$\d|deal|discount|marked down|sale|% off', text))
     row['funnel'] = 'Purchase-focused caption (inferred)' if row['offer_signal'] or row['keyword_cta'] else 'Unclassified'
     row['format'] = row['format'] or 'Not reviewed'
     row['hook'] = row['hook'] or 'Not reviewed'
@@ -93,6 +96,14 @@ def normalize(source):
     row['profile_url'] = public_url(row['profile_url']) or profile_link(row['platform'], row['account'])
     row['seller_url'] = public_url(row['seller_url'])
     row['comparables'] = [c for c in source.get('comparables') or [] if isinstance(c, dict) and public_url(c.get('url'))]
+    for key in ('publication_label', 'publication_observed_at', 'publication_source'):
+        row[key] = source.get(key) or ''
+    row['publication_bounds'] = relative_bounds(row)
+    row['is_pinned'] = truth(source.get('is_pinned', False))
+    row['excluded_from_discovery'] = truth(source.get('excluded_from_discovery', False))
+    row['followers'] = number(source.get('followers'))
+    row['followers_captured_at'] = source.get('followers_captured_at') or ''
+    row['profile_destination_url'] = public_url(source.get('profile_destination_url'))
     row['published_time_verified'] = False
     try:
         published = datetime.fromisoformat(str(row['posted_at']).replace('Z', '+00:00'))
@@ -118,7 +129,7 @@ def analyze(rows):
             groups[(row['platform'], row['account'])].append(row)
     systems = []
     for (platform, account), group in groups.items():
-        eligible = [r for r in group if not r['giveaway'] and r['views'] is not None]
+        eligible = [r for r in group if not r['giveaway'] and not r['is_pinned'] and r['views'] is not None]
         median = statistics.median(r['views'] for r in eligible) if eligible else None
         for row in group:
             row['views_vs_sample'] = round(row['views'] / median, 2) if median and row in eligible and len(eligible) >= 5 else None
@@ -137,7 +148,7 @@ def product_key(name):
     return re.sub(r'[^a-z0-9]+', ' ', str(name or '').lower()).strip()
 
 def cluster_comparables(posts):
-    """Link posts naming the same product from different accounts. Exact product-name match only."""
+    """Link distinct posts naming the same product, including repeat creative from one seller."""
     groups = defaultdict(list)
     for row in posts:
         key = product_key(row['product'])
@@ -147,7 +158,7 @@ def cluster_comparables(posts):
         for row in group:
             known = {c['url'] for c in row['comparables']}
             for other in group:
-                if other['account'] != row['account'] and other['url'] not in known:
+                if other['url'] != row['url'] and other['url'] not in known:
                     row['comparables'].append({'url': other['url'], 'account': other['account'], 'views': other['views'], 'posted_at': other['posted_at']})
                     known.add(other['url'])
 
@@ -158,6 +169,40 @@ def published(row):
         return None
     return value if value.tzinfo else None
 
+def relative_bounds(row):
+    if row.get('publication_source') != 'TikTok post detail relative-date label':
+        return None
+    match = re.fullmatch(r'(\d+)\s*([mhd]) ago', row.get('publication_label', '').strip())
+    if not match:
+        return None
+    try:
+        observed = datetime.fromisoformat(row['publication_observed_at'].replace('Z', '+00:00'))
+    except (ValueError, KeyError):
+        return None
+    if not observed.tzinfo:
+        return None
+    amount = int(match[1])
+    unit = {'m': 60, 'h': 3600, 'd': 86400}[match[2]]
+    # Allow one display unit either side; never claim an exact publication instant.
+    return {'earliest': (observed - timedelta(seconds=(amount + 1) * unit)).isoformat(),
+            'latest': (observed - timedelta(seconds=max(0, amount - 1) * unit)).isoformat(),
+            'precision': 'relative_' + match[2]}
+
+def in_window(row, now=None, hours=24):
+    now = now or datetime.now(timezone.utc)
+    exact = published(row)
+    if exact:
+        return 0 <= (now - exact).total_seconds() <= hours * 3600
+    bounds = relative_bounds(row)
+    if not bounds:
+        return False
+    observed = datetime.fromisoformat(row['publication_observed_at'].replace('Z', '+00:00'))
+    if observed > now:
+        return False
+    earliest = datetime.fromisoformat(bounds['earliest'])
+    latest = datetime.fromisoformat(bounds['latest'])
+    return latest <= now and 0 <= (now - earliest).total_seconds() <= hours * 3600
+
 def coverage(posts, now=None, hours=24):
     """Progress toward the 100-account goal. Qualified = named account, verified publish time inside
     the window, verified views, not a giveaway. Nothing here is relaxed to reach the target."""
@@ -165,8 +210,7 @@ def coverage(posts, now=None, hours=24):
     named = {(r['platform'], r['account']) for r in posts if r['account'] != 'Unverified'}
     qualified = set()
     for r in posts:
-        when = published(r)
-        if r['account'] != 'Unverified' and when and 0 <= (now - when).total_seconds() <= hours * 3600 and r['views'] is not None and not r['giveaway']:
+        if r['account'] != 'Unverified' and in_window(r, now, hours) and r['views'] is not None and not r['giveaway'] and not r['excluded_from_discovery']:
             qualified.add((r['platform'], r['account']))
     total = len(posts) or 1
     return {'checked_at': now.isoformat(), 'window_hours': hours, 'posts': len(posts), 'named_accounts': len(named),
@@ -174,6 +218,7 @@ def coverage(posts, now=None, hours=24):
             'older_or_incomplete_accounts': len(named - qualified),
             'metric_coverage': {m: round(sum(r[m] is not None for r in posts) / total, 3) for m in METRICS},
             'dated_posts': sum(published(r) is not None for r in posts),
+            'relative_dated_posts': sum(relative_bounds(r) is not None for r in posts),
             'with_image': sum(bool(r['image_url']) for r in posts),
             'with_profile_link': sum(bool(r['profile_url']) for r in posts),
             'with_store_link': sum(bool(r['seller_url']) for r in posts),
