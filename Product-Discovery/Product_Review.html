@@ -21,7 +21,7 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* Top bar */
-.top{position:sticky;top:0;z-index:20;background:rgba(251,251,253,.82);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--line)}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(251,251,253,.82);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--line)}
 .top-inner{max-width:1440px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:16px}
 .brand{font-size:19px;font-weight:600;letter-spacing:-.02em;margin:0;white-space:nowrap}
 .seg{display:inline-flex;background:#e8e8ed;border-radius:9px;padding:2px}
@@ -597,7 +597,8 @@ function exportCsv(){
   download('Product_Review_view_'+stamp()+'.csv','﻿'+[cols,...rows.map(p=>cols.map(c=>p[c]))].map(r=>r.map(q).join(',')).join('\r\n'),'text/csv');
   say('Exported '+rows.length+' rows from the current view.');
 }
-function resetEdits(){if(!confirm('Clear your local decisions, notes and imported rows for this file? Exported snapshots are not affected.'))return;store.clear();imports.clear();state.account='';load();render();say('Local edits cleared.')}
+let resetArmed=0;
+function resetEdits(){if(Date.now()-resetArmed>6000){resetArmed=Date.now();say('Choose Export → Clear local edits again within 6 seconds to remove your local decisions, notes and imported rows. Exported snapshots are not affected.');return}resetArmed=0;store.clear();imports.clear();state.account='';load();render();say('Local edits cleared.')}
 
 // import
 $('import-btn').onclick=()=>$('file').click();
