@@ -1,0 +1,30 @@
+{
+  "domain": "https://everythingiuse.com",
+  "verified_at": "2026-10-13T01:51:08.738Z",
+  "products": [
+    {
+      "brand": "THORN & TESTAMENT",
+      "title": "Walk By Faith Zip Hoodie",
+      "url": "https://www.thornandtestament.com/products/walk-by-faith-hoodie",
+      "image": "https://www.thornandtestament.com/cdn/shop/files/hf_20261011_040451_4cb0e3d1-268b-4e14-99a2-1d2afd95bec8.png?v=1791735892&width=1200"
+    },
+    {
+      "brand": "PURRBIT",
+      "title": "Pop-Up Cat Ball",
+      "url": "https://getpurrbit.com/products/purrbit-cat-ball",
+      "image": "https://getpurrbit.com/cdn/shop/t/1/assets/purrbit-d11979d3e5b2.jpg?v=35832178995104485651791675435"
+    },
+    {
+      "brand": "GlowDuel",
+      "title": "Infrared Laser Tag Set",
+      "url": "https://getglowduel.com/products/glowduel-laser-tag-set",
+      "image": "https://cdn.shopify.com/s/files/1/0842/2581/8852/files/glowduel-1.jpg?v=1791576895&width=1200"
+    },
+    {
+      "brand": "SNOOZLE",
+      "title": "Star Night Light",
+      "url": "https://getsnoozle.store/products/snoozle",
+      "image": "https://getsnoozle.store/cdn/shop/files/hf_20261010_183117_89f4fa52-7d2f-4eb0-9312-93d7f0bd829f.png?v=1791664344&width=1200"
+    }
+  ]
+}
